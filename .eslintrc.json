@@ -1,9 +1,23 @@
 {
   "extends": [
     "next/core-web-vitals",
+    "plugin:import/recommended",
+    "plugin:import/typescript",
     "prettier"
   ],
   "plugins": [
     "jest"
-  ]
+  ],
+  "rules": {
+    "import/order": [
+      "error",
+      {
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ]
+  }
 }
