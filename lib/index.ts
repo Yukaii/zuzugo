@@ -3,6 +3,7 @@ import { got } from "got";
 import { CookieJar } from "tough-cookie";
 
 import { config } from "./config";
+import { DataItem, JSONResponse } from "./types";
 
 const cookieJar = new CookieJar();
 
@@ -28,7 +29,7 @@ export async function getToken() {
   return csrfToken;
 }
 
-export async function getHouseList() {
+export async function getHouseList(): Promise<DataItem[]> {
   const csrfToken = await getToken();
   const houseListURL = config.houseListURL;
 
@@ -42,7 +43,7 @@ export async function getHouseList() {
 
     const {
       data: { data: houseList },
-    } = data as any;
+    } = data as JSONResponse;
 
     return houseList;
   } catch (error) {
