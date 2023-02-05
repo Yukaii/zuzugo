@@ -56,7 +56,7 @@ export interface DataItem {
   community: string;
   price: string;
   price_unit: string;
-  photo_list: any[];
+  photo_list: string[];
   section_name: string;
   street_name: string;
   location: string;
