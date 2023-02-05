@@ -1,5 +1,10 @@
 lockfileVersion: 5.4
 
+patchedDependencies:
+  jsx-slack@5.3.0:
+    hash: ful7f5aqgo3vohqsfpm3hvy52q
+    path: patches/jsx-slack@5.3.0.patch
+
 specifiers:
   '@faker-js/faker': ^7.6.0
   '@next/font': 13.1.6
@@ -38,7 +43,7 @@ dependencies:
   eslint: 8.33.0
   eslint-config-next: 13.1.6_4vsywjlpuriuw3tl5oq6zy5a64
   got: /got-cjs/12.5.4
-  jsx-slack: 5.3.0
+  jsx-slack: 5.3.0_ful7f5aqgo3vohqsfpm3hvy52q
   mongodb: 5.0.0
   next: 13.1.6_biqbaboplfbrettd7655fr4n2y
   react: 18.2.0
@@ -3383,12 +3388,13 @@ packages:
       object.assign: 4.1.4
     dev: false
 
-  /jsx-slack/5.3.0:
+  /jsx-slack/5.3.0_ful7f5aqgo3vohqsfpm3hvy52q:
     resolution: {integrity: sha512-xPYP8zLO31AKYiyuDJ88ykJzV/GvZUK+ktM4xE6ESIzrCICSd8nhrW/yaSyX45U+oD5LNTDUnhJvQe0LFDi63g==}
     engines: {node: '>=14'}
     dependencies:
       '@slack/types': 2.8.0
     dev: false
+    patched: true
 
   /keyv/4.5.2:
     resolution: {integrity: sha512-5MHbFaKn8cNSmVW7BYnijeAVlE4cYA/SVkifVgrh7yotnfhKmjuXpDKjrABLnT0SfHWV21P8ow07OGfRrNDg8g==}

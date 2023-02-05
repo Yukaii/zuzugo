@@ -39,5 +39,10 @@
     "prettier": "^2.8.3",
     "ts-jest": "^29.0.5",
     "ts-node": "^10.9.1"
+  },
+  "pnpm": {
+    "patchedDependencies": {
+      "jsx-slack@5.3.0": "patches/jsx-slack@5.3.0.patch"
+    }
   }
 }

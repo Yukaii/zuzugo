@@ -15,7 +15,7 @@ import {
 import { config } from "../config";
 import { DataItem } from "../types";
 
-const HouseBlock = ({ house }: { house: DataItem }) => {
+const HouseBlock = ({ house }: { house: DataItem; key?: string | number | undefined }) => {
   const updatedTime = new Date(house.updatetime * 1000);
 
   return (
