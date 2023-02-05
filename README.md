@@ -9,7 +9,8 @@
 - [x] 591 租屋爬蟲
 - Slack 通知系統
   - [x] 基本 Slack Webhook 通知
-  - 用 [phelia](https://github.com/maxchehab/phelia) 寫更多互動的 Slack 功能，比如：建立關注清單、價格變更、是否已出租
+  - [ ] 用 [phelia](https://github.com/maxchehab/phelia) 寫更多互動的 Slack 功能，比如：建立關注清單、價格變更、是否已出租
+- [ ] 一個炫炮的 Landing Page
 - [ ] Line Notify 通知 (WIP)
 - [ ] Telegram Bot 通知 (Planned)
 
