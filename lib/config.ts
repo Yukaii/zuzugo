@@ -9,6 +9,8 @@ const targetURL = process.env.TARGET_URL || "";
 const search = extractSearchParams(targetURL);
 const houseListURL = `https://rent.591.com.tw/home/search/rsList?${search}`;
 
+const apiSecret = process.env.ZUZUGO_API_SECRET;
+
 // const isSubwayStationFilterEnabled = process.env.ENABLE_SUBWAY_STATION_FILTER === "true";
 // const subwayStation = JSON.parse(process.env.SUBWAY_STATION_FILTER);
 // const subwayStationDistance = parseInt(process.env.SUBWAY_STATION_FILTER_DISTANCE, 10) || 1000;
@@ -23,4 +25,5 @@ export const config = {
   //   distance: subwayStationDistance,
   // },
   slackWebhook,
+  apiSecret,
 };
