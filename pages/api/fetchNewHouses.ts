@@ -32,7 +32,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // TODO: send notification
     console.log(newHouses);
 
-    return res.status(200);
+    return res.status(200).json({ message: "OK" });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: "Internal Server Error" });
