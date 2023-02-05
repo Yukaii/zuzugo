@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "pages/api/fetchNewHouses.js": {
+      "maxDuration": 30
+    }
+  }
+}

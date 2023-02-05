@@ -25,15 +25,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(401).json({ message: "Unauthorized" });
   }
 
-  res.status(200).json({ message: "OK" });
-
   try {
     const houses = await getHouseList();
     const newHouses = await store.refreshWithHouses(houses);
 
     // TODO: send notification
     console.log(newHouses);
+
+    return res.status(200);
   } catch (error) {
     console.error(error);
+    return res.status(500).json({ message: "Internal Server Error" });
   }
 }
