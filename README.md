@@ -19,8 +19,8 @@
 1. Clone 專案，然後
 
 ```bash
-  pnpm install
-  cp .env.example .env.local
+pnpm install
+cp .env.example .env.local
 ```
 
 ## Previous Works
