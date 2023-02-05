@@ -17,6 +17,7 @@ import { DataItem } from "../types";
 
 const HouseBlock = ({ house }: { house: DataItem; key?: string | number | undefined }) => {
   const updatedTime = new Date(house.updatetime * 1000);
+  const mobileUrl = `https://house591.page.link/?link=https://m.591.com.tw/v2/rent/${house.post_id}&apn=com.addcn.android.house591&amv=147&afl=https://www.591.com.tw/home/tools/app/android?id=com.addcn.android.house591&ifl=https://www.591.com.tw/home/tools/app/ios&isi=448156496&ibi=com.Addcn.house591&ipbi=com.Addcn.house591&efr=1`;
 
   return (
     <Fragment>
@@ -49,6 +50,10 @@ const HouseBlock = ({ house }: { house: DataItem; key?: string | number | undefi
 
         <Button url={`https://www.google.com/maps/search/?api=1&query=${house.location}`}>
           在 Google Maps 打開
+        </Button>
+
+        <Button url={mobileUrl} style="danger">
+          在手機 App 打開
         </Button>
       </Actions>
 
