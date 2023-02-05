@@ -15,7 +15,7 @@ const apiSecret = process.env.ZUZUGO_API_SECRET;
 // const subwayStation = JSON.parse(process.env.SUBWAY_STATION_FILTER);
 // const subwayStationDistance = parseInt(process.env.SUBWAY_STATION_FILTER_DISTANCE, 10) || 1000;
 
-const slackWebhook = process.env.SLACK_WEBHOOK;
+const slackWebhook = process.env.SLACK_WEBHOOK!;
 
 export const config = {
   houseListURL,
