@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 
 import { getHouseList } from "@/lib/api";
 import { config } from "@/lib/config";
+import { notifyTargets } from "@/lib/notification";
 import { HouseStore } from "@/lib/store";
 
 const store = new HouseStore({});
@@ -29,8 +30,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const houses = await getHouseList();
     const newHouses = await store.refreshWithHouses(houses);
 
-    // TODO: send notification
-    console.log(newHouses);
+    notifyTargets(newHouses);
 
     return res.status(200).json({ message: "OK" });
   } catch (error) {
