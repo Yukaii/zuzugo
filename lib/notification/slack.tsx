@@ -17,14 +17,12 @@ import { DataItem } from "../types";
 
 const HouseBlock = ({ house }: { house: DataItem }) => {
   const updatedTime = new Date(house.updatetime * 1000);
-  const refreshTime = new Date(house.refreshtime * 1000);
 
   return (
     <Fragment>
       <Header>{house.address_img_title || ""}</Header>
       <Section>
-        <b>{house.price}</b>
-        {house.unit}
+        <b>{house.price}</b> {house.unit}
         <br />
         {house.layout} | {house.area}坪 | {house.floorStr}
         <br />

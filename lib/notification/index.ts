@@ -9,6 +9,5 @@ export async function notifyTargets(newHouses: DataItem[]) {
     notifyConsole(newHouses);
   }
 
-  // TODO: add more notification targets
   await notifySlack(newHouses);
 }
