@@ -5,9 +5,7 @@
     "plugin:import/typescript",
     "prettier"
   ],
-  "plugins": [
-    "jest"
-  ],
+  "plugins": ["jest"],
   "rules": {
     "import/order": [
       "error",
