@@ -2,6 +2,8 @@ name: Refresh cron
 on:
   schedule:
     - cron: '* * * * *'
+  workflow_dispatch:
+
 jobs:
   cron:
     runs-on: ubuntu-latest
