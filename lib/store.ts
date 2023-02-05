@@ -1,16 +1,18 @@
-import { MongoClient } from "mongodb";
+import { Db, MongoClient } from "mongodb";
 
 import { DataItem } from "./types";
 
 const MAX_LIST_LENGTH = 100;
 
-export const client = new MongoClient(process.env.MONGODB_URI!);
-export const db = client.db("houseStore");
+export let client: MongoClient;
+let db: Db;
 
 export class HouseStore {
   private maxListLength: number;
 
   constructor({ maxListLength }: { maxListLength?: number } = {}) {
+    client = new MongoClient(process.env.MONGODB_URI!);
+    db = client.db("houseStore");
     this.maxListLength = maxListLength || MAX_LIST_LENGTH;
   }
 
