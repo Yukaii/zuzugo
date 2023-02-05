@@ -39,7 +39,7 @@ const HouseBlock = ({ house }: { house: DataItem; key?: string | number | undefi
       </Section>
 
       <Context>
-        {house.posttime} 內更新（{updatedTime.toLocaleString()}）<br />
+        {house.posttime} 更新（{updatedTime.toLocaleString()}）<br />
         瀏覽次數：{house.browsenum_all}
       </Context>
 
