@@ -1,4 +1,4 @@
-import { getToken, getHouseList } from "@/lib";
+import { getToken, getHouseList } from "@/lib/api";
 
 test("getToken should return string results", async function () {
   const csrfToken = await getToken();

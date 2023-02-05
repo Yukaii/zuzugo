@@ -3,7 +3,7 @@ import { got } from "got";
 import { CookieJar } from "tough-cookie";
 
 import { config } from "./config";
-import { DataItem, JSONResponse } from "./types";
+import { DataItem, RListAPI } from "./types";
 
 const cookieJar = new CookieJar();
 
@@ -43,7 +43,7 @@ export async function getHouseList(): Promise<DataItem[]> {
 
     const {
       data: { data: houseList },
-    } = data as JSONResponse;
+    } = data as RListAPI;
 
     return houseList;
   } catch (error) {

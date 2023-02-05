@@ -1,4 +1,4 @@
-export interface JSONResponse {
+export interface RListAPI {
   status: number;
   data: Data;
   records: string;
