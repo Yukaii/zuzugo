@@ -84,7 +84,7 @@ export async function notify(newHouses: DataItem[]) {
   console.debug(`Sending slack message: ${JSON.stringify(newHouses.length)}`);
 
   const webhook = new IncomingWebhook(config.slackWebhook);
-  const blocks = HouseMessages({ houses: newHouses }) as unknown as any[];
+  const blocks = HouseMessages({ houses: newHouses.reverse() }) as unknown as any[];
 
   if (!config.production) {
     console.log(`Sending slack message: ${JSON.stringify(blocks)}`);
