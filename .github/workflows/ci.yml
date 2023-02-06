@@ -49,9 +49,10 @@ jobs:
       run: pnpm run lint
 
     - uses: neofinancial/mongo-memory-server-action@v1.0.2
+      name: Run tests
       with:
-        db-connection-env-var: ${{ secrets.MONGODB_URI }}
-        run-command: echo "hi"
+        db-connection-env-var: mongodb://localhost:27017/zuzugo-test
+        instance-dbName: zuzugo-test
+        run-command: pnpm test
+        mongoms-debug: 1
       
-    - name: Run tests
-      run: pnpm test
