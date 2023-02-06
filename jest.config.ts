@@ -16,6 +16,9 @@ const customJestConfig: JestConfigWithTsJest = {
   },
   transformIgnorePatterns: ["<rootDir>/node_modules/"],
   extensionsToTreatAsEsm: [".ts"],
+  globalSetup: "<rootDir>/tests/utils/globalSetup.ts",
+  globalTeardown: "<rootDir>/tests/utils/globalTeardown.ts",
+  setupFilesAfterEnv: ["<rootDir>/tests/utils/setupFile.ts"],
 };
 
 export default createJestConfig(customJestConfig);

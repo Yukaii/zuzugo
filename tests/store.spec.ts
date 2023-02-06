@@ -1,6 +1,6 @@
 import { houseFactory } from "./factory";
 
-import { HouseStore, client } from "@/lib/store";
+import { HouseStore } from "@/lib/store";
 
 const store = new HouseStore({});
 
@@ -63,8 +63,4 @@ test("should refresh new houses to the top of the list", async function () {
   expect(newHouses.every((h) => listFromStore.find((house) => house.post_id === h.post_id))).toBe(
     true
   );
-});
-
-afterAll(async function () {
-  return client.close();
 });
