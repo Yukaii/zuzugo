@@ -1,16 +1,6 @@
-import { faker } from "@faker-js/faker";
+import { houseFactory } from "./factory";
 
 import { HouseStore, client } from "@/lib/store";
-import { DataItem } from "@/lib/types";
-
-function createRandomHouse() {
-  return {
-    post_id: Math.floor(Math.random() * 100000),
-    title: faker.lorem.sentence(),
-    type: faker.random.words(),
-    price: faker.finance.amount(),
-  } as DataItem;
-}
 
 const store = new HouseStore({});
 
@@ -19,7 +9,7 @@ test("should run #refreshWithHouses", async function () {
 });
 
 test("should store latest houses", async function () {
-  const houses = Array.from({ length: 10 }, createRandomHouse);
+  const houses = Array.from({ length: 10 }, houseFactory);
 
   await store.clearStore();
 
@@ -33,7 +23,7 @@ test("should store latest houses", async function () {
 });
 
 test("should deduplicate based on post_id", async function () {
-  const houses = Array.from({ length: 10 }, createRandomHouse);
+  const houses = Array.from({ length: 10 }, houseFactory);
   await store.clearStore();
 
   await store.refreshWithHouses(houses);
@@ -45,7 +35,7 @@ test("should deduplicate based on post_id", async function () {
 });
 
 test("should maintain up to maxListLength houses", async function () {
-  const houses = Array.from({ length: 10 }, createRandomHouse);
+  const houses = Array.from({ length: 10 }, houseFactory);
 
   const limitStore = new HouseStore({ maxListLength: 5 });
 
@@ -59,12 +49,12 @@ test("should maintain up to maxListLength houses", async function () {
 });
 
 test("should refresh new houses to the top of the list", async function () {
-  const houses = Array.from({ length: 10 }, createRandomHouse);
+  const houses = Array.from({ length: 10 }, houseFactory);
   await store.clearStore();
 
   await store.refreshWithHouses(houses);
 
-  const newHouses = Array.from({ length: 5 }, createRandomHouse);
+  const newHouses = Array.from({ length: 5 }, houseFactory);
 
   await store.refreshWithHouses(newHouses);
 
