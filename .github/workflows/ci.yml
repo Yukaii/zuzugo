@@ -47,6 +47,11 @@ jobs:
 
     - name: Run lint
       run: pnpm run lint
+
+    - uses: neofinancial/mongo-memory-server-action@v1.0.2
+      with:
+        db-connection-env-var: ${{ secrets.MONGODB_URI }}
+        run-command: echo "hi"
       
     - name: Run tests
       run: pnpm test
