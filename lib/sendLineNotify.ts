@@ -1,10 +1,7 @@
 import { got } from "got";
 
-export const sendLineNotify = async (
-  messageContent: string,
-  lineNotifyToken: string | undefined
-) => {
-  console.log("送提醒喔");
+export async function sendLineNotify(messageContent: string, lineNotifyToken: string | undefined) {
+  console.log("sendLineNotify");
 
   try {
     const resp = await got.post({
@@ -24,4 +21,4 @@ export const sendLineNotify = async (
 
     throw `Line Token 可能過期了`;
   }
-};
+}
