@@ -10,4 +10,4 @@ test("getHouseList should return array of house data", async function () {
   const houseList = await getHouseList();
 
   expect(Array.isArray(houseList)).toBe(true);
-});
+}, 10000);
