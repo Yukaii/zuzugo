@@ -16,7 +16,7 @@ import { config } from "../config";
 import { DataItem } from "../types";
 
 const HouseBlock = ({ house }: { house: DataItem; key?: string | number | undefined }) => {
-  const updatedTime = new Date(house.updatetime * 1000);
+  const updatedTime = new Date(house.updatetime * 1000 + 8 * 60 * 60 * 1000);
   const mobileUrl = `https://house591.page.link/?link=https://m.591.com.tw/v2/rent/${house.post_id}&apn=com.addcn.android.house591&amv=147&afl=https://www.591.com.tw/home/tools/app/android?id=com.addcn.android.house591&ifl=https://www.591.com.tw/home/tools/app/ios&isi=448156496&ibi=com.Addcn.house591&ipbi=com.Addcn.house591&efr=1`;
 
   return (
