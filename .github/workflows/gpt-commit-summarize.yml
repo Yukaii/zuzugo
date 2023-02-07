@@ -3,12 +3,15 @@ name: GPT Commits summarizer
 
 on:
   pull_request:
-    types: [opened, synchronize]
+    types: [opened, synchronize, labeled, unlabeled]
+  label:
+    types: [created, deleted, edited]
 
 jobs:
   summarize:
     runs-on: ubuntu-latest
     permissions: write-all  # Some repositories need this line
+    if: contains( github.event.pull_request.labels.*.name, 'gpt-summary')
 
     steps:
       - uses: KanHarI/gpt-commit-summarizer@50a2e65d8816904f457cb4d5390f2804a4cfd5a7
