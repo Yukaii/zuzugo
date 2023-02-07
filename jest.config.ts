@@ -13,6 +13,7 @@ const customJestConfig: JestConfigWithTsJest = {
     "^@/components/(.*)$": "<rootDir>/components/$1",
     "^@/pages/(.*)$": "<rootDir>/pages/$1",
     "^@/lib(.*)$": "<rootDir>/lib$1",
+    "^@/tests/(.*)$": "<rootDir>/tests/$1",
   },
   transformIgnorePatterns: ["<rootDir>/node_modules/"],
   extensionsToTreatAsEsm: [".ts"],
