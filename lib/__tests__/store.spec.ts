@@ -1,6 +1,5 @@
-import { houseFactory } from "./factory";
-
 import { HouseStore } from "@/lib/store";
+import { houseFactory } from "@/tests/factory";
 
 let store: HouseStore;
 
