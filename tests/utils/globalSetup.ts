@@ -18,7 +18,7 @@ export default async function globalSetup() {
   // The following is to make sure the database is clean before an test starts
   const client = await MongoClient.connect(`${process.env.MONGODB_URI}`);
 
-  const db = client.db(config.Database);
+  const db = client.db();
   await db.dropDatabase();
   await client.close();
 }
