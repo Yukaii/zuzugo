@@ -25,3 +25,6 @@ actions:
     - trunk-announce
     - trunk-check-pre-push
     - trunk-upgrade-available
+merge:
+  required_statuses:
+    - Lint and Test
