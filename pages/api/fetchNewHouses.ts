@@ -30,6 +30,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const houses = await getHouseList();
     const newHouses = await store.refreshWithHouses(houses);
 
+    console.debug(`Found ${newHouses.length} new houses`);
+
     if (newHouses.length > 0) {
       await notifyTargets(newHouses);
     }
