@@ -16,7 +16,7 @@ test("Send Line Notify", async () => {
   - ${randomHouse.cases_name} 
   ${randomHouse.fulladdress}
 
-  ${randomHouse.rentTag.map((tag) => `\`${tag.name}\` `)}
+  ${randomHouse.rentTag.map((tag: { name: any }) => `\`${tag.name}\` `)}
   
   照片：${randomHouse.cover ? `![${randomHouse.photo_alt || ""}](${randomHouse.cover})` : ""}
 
