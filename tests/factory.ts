@@ -21,6 +21,7 @@ export function houseFactory(props: Partial<DataItem> = {}): DataItem {
     updatetime: Date.now().valueOf() / 1000,
     browsenum_all: Math.floor(Math.random() * 100000),
     location: faker.address.streetAddress(),
+    mobileURL: faker.internet.url(),
     ...props,
   } as DataItem;
 }
