@@ -33,6 +33,7 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^7.6.0",
+    "@trunkio/launcher": "^1.2.3",
     "@types/jest": "^29.4.0",
     "@types/tough-cookie": "^4.0.2",
     "eslint-config-prettier": "^8.6.0",

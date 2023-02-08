@@ -12,6 +12,7 @@ specifiers:
   '@slack/bolt': ^3.12.2
   '@slack/oauth': ^2.6.0
   '@slack/webhook': ^6.1.0
+  '@trunkio/launcher': ^1.2.3
   '@types/jest': ^29.4.0
   '@types/node': 18.11.18
   '@types/react': 18.0.27
@@ -60,6 +61,7 @@ dependencies:
 
 devDependencies:
   '@faker-js/faker': 7.6.0
+  '@trunkio/launcher': 1.2.3
   '@types/jest': 29.4.0
   '@types/tough-cookie': 4.0.2
   eslint-config-prettier: 8.6.0_eslint@8.33.0
@@ -1873,6 +1875,11 @@ packages:
     dependencies:
       defer-to-connect: 2.0.1
     dev: false
+
+  /@trunkio/launcher/1.2.3:
+    resolution: {integrity: sha512-eq0mhRr4ZlJxzcOJO5/scfQUZ+/kk9iwM8dHXQ6GPMWUq4qz40vW4EMMcYEwjSopJKLNxCVldZrXI02pq9Gx2Q==}
+    hasBin: true
+    dev: true
 
   /@tsconfig/node10/1.0.9:
     resolution: {integrity: sha512-jNsYVVxU8v5g43Erja32laIDHXeoNvFEpX33OK4d6hljo3jDhCBDhx5dhCCTMWUojscpAagGiRkBKxpdl9fxqA==}

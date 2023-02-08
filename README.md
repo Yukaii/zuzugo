@@ -29,7 +29,7 @@ cp .env.example .env.local
 - 豬豬快租 -> zuzu.com.tw
 - [bbgo](https://github.com/c9s/bbgo) -> BB 狗，雖然本專案沒有半行 Go...
 
-![](http://1.bp.blogspot.com/-h-sB7bTbyDo/XmerCeUWoCI/AAAAAAAALSU/3DmKLm3ZXh8NUecPNKHB0YCVrUd51MbRQCK4BGAYYCw/s1600/noname.png)
+![yeah](http://1.bp.blogspot.com/-h-sB7bTbyDo/XmerCeUWoCI/AAAAAAAALSU/3DmKLm3ZXh8NUecPNKHB0YCVrUd51MbRQCK4BGAYYCw/s1600/noname.png)
 
 ## License
 
