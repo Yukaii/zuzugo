@@ -110,3 +110,205 @@ interface Seo {
   keywords: string;
   description: string;
 }
+
+// GET https://bff.591.com.tw/v1/house/rent/detail?id=13959742
+
+export interface DetailItem {
+  breadcrumb: BreadcrumbItem[];
+  title: string;
+  deposit: string;
+  kind: number;
+  relieved: number;
+  regionId: number;
+  sectionId: number;
+  shareInfo: ShareInfo;
+  dealText: string;
+  dealTime: number;
+  browse: Browse;
+  tags: TagsItem[];
+  price: string;
+  priceUnit: string;
+  navData: NavDataItem[];
+  priceCacheTxt: string;
+  priceCache: any[];
+  info: InfoItem[];
+  publish: Publish;
+  rooms: Rooms;
+  positionRound: PositionRound;
+  service: Service;
+  preference: Preference;
+  remark: Remark;
+  houseDetail: HouseDetail;
+  costData: CostData;
+  infoData: InfoData;
+  questionData: QuestionData;
+  linkInfo: LinkInfo;
+  favData: FavData;
+}
+
+interface BreadcrumbItem {
+  name: string;
+  id: number;
+  query: string;
+  link: string;
+}
+
+interface ShareInfo {
+  url: string;
+  from: string;
+  title: string;
+}
+interface Browse {
+  pc: number;
+  mobile: number;
+}
+interface TagsItem {
+  id: number;
+  value: string;
+}
+interface NavDataItem {
+  title: string;
+  key: string;
+  active: number;
+}
+interface InfoItem {
+  name: string;
+  value: string;
+  key: string;
+}
+interface Publish {
+  id: number;
+  name: string;
+  key: string;
+  postTime: string;
+  updateTime: string;
+}
+interface Rooms {
+  title: string;
+  key: string;
+  active: number;
+  data: any[];
+}
+interface PositionRound {
+  title: string;
+  key: string;
+  active: number;
+  communityName: string;
+  communityId: number;
+  address: string;
+  lat: string;
+  lng: string;
+  data: PositionRoundDataItem[];
+  mapData: MapDataItem[];
+}
+interface PositionRoundDataItem {
+  name: string;
+  key?: string;
+  children?: ChildrenItem[];
+  id?: number;
+  text?: string;
+  icon?: string;
+  value?: string;
+  alias?: string;
+  cate?: number;
+}
+interface ChildrenItem {
+  type?: string;
+  name: string;
+  distance?: number;
+  distanceTxt?: string;
+  key?: string;
+  children?: ChildrenItem[];
+  lat?: string;
+  lng?: string;
+  trading_area_id?: number;
+  trading_area_distance?: number;
+}
+interface MapDataItem {
+  name: string;
+  key: string;
+  children: ChildrenItem[];
+}
+interface Service {
+  title: string;
+  key: string;
+  active: number;
+  facility: FacilityItem[];
+  desc: string;
+  rule: string;
+}
+interface FacilityItem {
+  key: string;
+  active: number;
+  name: string;
+}
+interface Preference {
+  title: string;
+  active: number;
+  footnote: string;
+  data: DataItem[];
+}
+interface Remark {
+  title: string;
+  key: string;
+  active: number;
+  content: string;
+}
+interface HouseDetail {
+  title: string;
+  key: string;
+  active: number;
+}
+interface CostData {
+  title: string;
+  active: number;
+  data: DataItem[];
+}
+interface InfoData {
+  title: string;
+  active: number;
+  data: DataItem[];
+  hasCertificate: number;
+}
+interface QuestionData {
+  title: string;
+  key: string;
+  active: number;
+}
+interface LinkInfo {
+  avatar: string;
+  chargeTxt: string;
+  name: string;
+  role: number;
+  roleName: string;
+  roleTxt: string;
+  certificateStatus: number;
+  certificateTxt: string;
+  line: string;
+  imUid: number;
+  imName: string;
+  isTransferTel: number;
+  mobile: string;
+  phone: string;
+  uid: number;
+  warnmsg: number;
+  tips: string;
+  shopVolume: number;
+  shopStatus: number;
+  shopId: number;
+  rentNum: number;
+  saleNum: number;
+  skillCases: any[];
+  skillWork: any[];
+}
+interface FavData {
+  thumb: string;
+  title: string;
+  layout: string;
+  address: string;
+  price: number;
+  area: string;
+  kindTxt: string;
+  posttime: number;
+  count: number;
+}
