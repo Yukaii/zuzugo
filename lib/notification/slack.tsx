@@ -16,31 +16,31 @@ import { config } from "../config";
 import { DataItem } from "../types";
 
 const HouseBlock = ({ house }: { house: DataItem; key?: string | number | undefined }) => {
-  const updatedTime = new Date(house.updatetime * 1000 + 8 * 60 * 60 * 1000);
   const mobileUrl = `https://house591.page.link/?link=https://m.591.com.tw/v2/rent/${house.post_id}&apn=com.addcn.android.house591&amv=147&afl=https://www.591.com.tw/home/tools/app/android?id=com.addcn.android.house591&ifl=https://www.591.com.tw/home/tools/app/ios&isi=448156496&ibi=com.Addcn.house591&ipbi=com.Addcn.house591&efr=1`;
+
+  const coverPhoto = house.photo_list[0];
 
   return (
     <Fragment>
       <Header>{house.title || ""}</Header>
       <Section>
-        <b>{house.price}</b> {house.unit}
+        <b>{house.price}</b> {house.price_unit}
         <br />
-        {house.layout} | {house.area}坪 | {house.floorStr}
+        {house.kind_name} | {house.area}坪 | {house.floor_str}
         <br />
-        {house.cases_name} {house.fulladdress}
+        {house.community} {house.location}
         <br />
         <br />
-        {house.rentTag?.map((tag) => (
+        {house.rent_tag?.map((tag) => (
           <Fragment key={tag.id}>`{tag.name}` </Fragment>
         ))}
-        {house.cover && (
-          <Image src={house.cover} alt={house.photo_alt || ""} title={house.photo_alt || ""} />
-        )}
+        {coverPhoto && <Image src={coverPhoto} alt={house.title || ""} title={house.title || ""} />}
       </Section>
 
       <Context>
-        {house.posttime} 更新（{updatedTime.toLocaleString()}）<br />
-        瀏覽次數：{house.browsenum_all}
+        {house.refresh_time} 更新
+        <br />
+        昨日 {house.yesterday_hit} 人瀏覽
       </Context>
 
       <Actions>
