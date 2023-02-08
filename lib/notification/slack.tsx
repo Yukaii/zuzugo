@@ -21,7 +21,7 @@ const HouseBlock = ({ house }: { house: DataItem; key?: string | number | undefi
 
   return (
     <Fragment>
-      <Header>{house.address_img_title || ""}</Header>
+      <Header>{house.title || ""}</Header>
       <Section>
         <b>{house.price}</b> {house.unit}
         <br />

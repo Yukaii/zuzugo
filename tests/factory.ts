@@ -8,7 +8,6 @@ export function houseFactory(props: Partial<DataItem> = {}): DataItem {
     title: faker.lorem.sentence(),
     type: faker.random.words(),
     price: faker.finance.amount(),
-    address_img_title: faker.lorem.sentence(),
     unit: "元/月",
     layout: faker.random.words(),
     area: faker.finance.amount(),

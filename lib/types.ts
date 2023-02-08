@@ -131,7 +131,7 @@ export interface DataItem {
   icon_name: string;
   icon_class: string;
   fulladdress: string;
-  address_img_title: string;
+  title: string;
   browsenum_name: string;
   unit: string;
   houseid: number;
