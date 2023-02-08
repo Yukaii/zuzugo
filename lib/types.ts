@@ -142,7 +142,7 @@ export interface DataItem {
   surrounding: Surrounding;
   onepxImg: string;
   is_video: number;
-  rentTag: RentTagItem[];
+  rentTag?: RentTagItem[];
   preferred: number;
   photoList?: string[];
 }

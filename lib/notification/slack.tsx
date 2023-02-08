@@ -30,7 +30,7 @@ const HouseBlock = ({ house }: { house: DataItem; key?: string | number | undefi
         {house.cases_name} {house.fulladdress}
         <br />
         <br />
-        {house.rentTag.map((tag) => (
+        {house.rentTag?.map((tag) => (
           <Fragment key={tag.id}>`{tag.name}` </Fragment>
         ))}
         {house.cover && (
