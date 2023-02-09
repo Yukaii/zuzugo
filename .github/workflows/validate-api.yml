@@ -1,0 +1,16 @@
+name: Validate API
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  cron:
+    name: Validate the API
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/setup-repo
+
+      - name: RUn validation tests
+        run: pnpm test -- -t "validate"
