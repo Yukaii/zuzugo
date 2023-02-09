@@ -1,7 +1,7 @@
 import { getHouseList } from "@/lib/api";
 import { dataItemSchema } from "@/lib/zod";
 
-test("getHouseList should return array of house data", async function () {
+test("validate getHouseLIst schema", async function () {
   const houseList = await getHouseList();
 
   expect(Array.isArray(houseList)).toBe(true);
