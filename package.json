@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "fmt": "prettier --write .",
-    "test": "jest"
+    "test": "jest",
+    "zod:gen": "ts-to-zod lib/types.ts lib/zod.ts"
   },
   "dependencies": {
     "@next/font": "13.1.6",
@@ -29,7 +30,8 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "tough-cookie": "^4.1.2",
-    "typescript": "4.9.5"
+    "typescript": "4.9.5",
+    "zod": "^3.20.6"
   },
   "devDependencies": {
     "@faker-js/faker": "^7.6.0",
@@ -43,7 +45,8 @@
     "mongodb-memory-server": "^8.11.4",
     "prettier": "^2.8.3",
     "ts-jest": "^29.0.5",
-    "ts-node": "^10.9.1"
+    "ts-node": "^10.9.1",
+    "ts-to-zod": "^2.0.1"
   },
   "pnpm": {
     "patchedDependencies": {

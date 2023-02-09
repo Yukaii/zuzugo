@@ -212,7 +212,7 @@ interface PositionRoundDataItem {
   alias?: string;
   cate?: number;
 }
-interface ChildrenItem {
+export interface ChildrenItem {
   type?: string;
   name: string;
   distance?: number;
