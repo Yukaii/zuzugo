@@ -27,4 +27,5 @@ actions:
     - trunk-upgrade-available
 merge:
   required_statuses:
-    - Lint and Test
+    - Lint
+    - Test
