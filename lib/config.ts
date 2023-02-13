@@ -22,6 +22,8 @@ const houseListURL = `https://rent.591.com.tw/home/search/rsList?${appendRentalA
 
 const apiSecret = process.env.ZUZUGO_API_SECRET;
 
+const tokenLine = process.env.LINE_API_TOKEN;
+
 // const isSubwayStationFilterEnabled = process.env.ENABLE_SUBWAY_STATION_FILTER === "true";
 // const subwayStation = JSON.parse(process.env.SUBWAY_STATION_FILTER);
 // const subwayStationDistance = parseInt(process.env.SUBWAY_STATION_FILTER_DISTANCE, 10) || 1000;
@@ -37,5 +39,6 @@ export const config = {
   // },
   slackWebhook,
   apiSecret,
+  tokenLine,
   production: process.env.NODE_ENV === "production",
 };
