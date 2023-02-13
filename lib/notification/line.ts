@@ -1,5 +1,5 @@
-/** @jsxImportSource jsx-line */
 import { config } from "../config";
+import { sendLineNotify } from "../sendLineNotify";
 import { DataItem } from "../types";
 
 const HouseBlock = ({ house }: { house: DataItem; key?: string | number | undefined }) => {
@@ -8,7 +8,7 @@ const HouseBlock = ({ house }: { house: DataItem; key?: string | number | undefi
   const coverPhoto = house.photo_list[0];
 
   return `
-  🏠 ${house.title || ""}
+🏠 ${house.title || ""}
 
 - ${house.price} / ${house.price_unit}
 - ${house.kind_name} | ${house.area} 坪 | ${house.floor_str}
@@ -23,23 +23,26 @@ ${house.title || ""} (${coverPhoto})
 
 [在網頁版打開](https://rent.591.com.tw/home/${house.post_id})
 [在 Google Maps 打開](https://www.google.com/maps/search/?api=1&query=${house.location})
-[在手機 App 打開](${mobileUrl})
-
----
-    `;
+[在手機 App 打開](${mobileUrl})`;
 };
 
 const HouseMessages = ({ houses }: { houses: DataItem[] }) => {
   return `
-      # 找到新租房資訊
-      ${houses.map((house) => `${house} key=${house.post_id}`)}
-  `;
+# 找到新租房資訊
+  ${houses.map((house) => `${house} key=${house.post_id}`)}
+`;
 };
 
-export async function notify(newHouses: DataItem[]) {
+export async function LineNotify(newHouses: DataItem[]) {
   const blocks = HouseMessages({ houses: newHouses.reverse() }) as unknown as any[];
+
+  if (!config.tokenLine) {
+    return;
+  }
 
   if (!config.production) {
     console.log(`Sending line message: ${JSON.stringify(blocks)}`);
   }
+
+  await blocks;
 }

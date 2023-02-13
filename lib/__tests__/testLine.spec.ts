@@ -23,6 +23,7 @@ test("Send Line Notify", async () => {
   在 Google Maps 打開 (https://www.google.com/maps/search/?api=1&query=${randomHouse.location})
   在手機 App 打開 (${mobileUrl})
   `,
+    `${randomHouse.cover}`,
     config.tokenLine
   );
 });
