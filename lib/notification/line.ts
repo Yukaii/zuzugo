@@ -30,7 +30,7 @@ ${house.title || ""} (${coverPhoto})
 [在手機 App 打開](${mobileUrl})`;
 };
 
-export async function LineNotify(newHouses: DataItem[]) {
+export async function notify(newHouses: DataItem[]) {
   const messages = newHouses.reverse().map((house) => ({
     message: generateHouseMessage(house),
     cover: getCoverPhoto(house),
