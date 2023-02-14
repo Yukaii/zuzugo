@@ -2,7 +2,7 @@ import { got } from "got";
 
 export async function sendLineNotify(
   messageContent: string,
-  msgImg: string,
+  msgImg: string | undefined,
   lineNotifyToken: string | undefined
 ) {
   console.log("sendLineNotify");
