@@ -4,8 +4,9 @@ import { getHouseList } from "@/lib/api";
 import { config } from "@/lib/config";
 import { notifyTargets } from "@/lib/notification";
 import { HouseStore } from "@/lib/store";
+import { DataItem } from "@/lib/types";
 
-const store = new HouseStore({});
+const store = new HouseStore<DataItem, "post_id">({});
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   // method guard

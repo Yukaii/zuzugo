@@ -1,7 +1,9 @@
+import { DataItem } from "../types";
+
 import { HouseStore } from "@/lib/store";
 import { houseFactory } from "@/tests/factory";
 
-let store: HouseStore;
+let store: HouseStore<DataItem, "post_id">;
 
 beforeEach(async function () {
   store = new HouseStore({});
@@ -42,7 +44,7 @@ test("should deduplicate based on post_id", async function () {
 test("should maintain up to maxListLength houses", async function () {
   const houses = Array.from({ length: 10 }, houseFactory);
 
-  const limitStore = new HouseStore({ maxListLength: 5 });
+  const limitStore = new HouseStore<DataItem, "post_id">({ maxListLength: 5 });
   await limitStore.refreshWithHouses(houses);
 
   const listFromStore = await limitStore.getHouses();
@@ -76,4 +78,30 @@ test("should refresh new houses to the top of the list", async function () {
   expect(newHouses.every((h) => listFromStore.find((house) => house.post_id === h.post_id))).toBe(
     true
   );
+});
+
+type CustomDataItem = {
+  id: string;
+  name: string;
+};
+
+test("should used another type of index and collection name for the store", async function () {
+  const customHouse = {
+    id: "123",
+    name: "test house",
+  };
+
+  const customStore = new HouseStore<CustomDataItem, "id">({
+    collectionName: "custom",
+    indexName: "id",
+  });
+
+  await customStore.refreshWithHouses([customHouse]);
+
+  const listFromStore = await customStore.getHouses();
+
+  expect(listFromStore.length).toBe(1);
+  expect(listFromStore[0].id).toBe(customHouse.id);
+
+  await customStore.disconnect();
 });
