@@ -29,7 +29,7 @@ ${house.community} 🗺️ ${house.location}
 `;
 };
 
-export async function LineNotify(newHouses: DataItem[]) {
+export async function notify(newHouses: DataItem[]) {
   const messages = newHouses.reverse().map((house) => ({
     message: generateHouseMessage(house),
     cover: getCoverPhoto(house),

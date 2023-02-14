@@ -10,6 +10,15 @@ export async function notifyTargets(newHouses: DataItem[]) {
     notifyConsole(newHouses);
   }
 
-  await notifySlack(newHouses);
-  await notifyLine(newHouses);
+  try {
+    await notifySlack(newHouses);
+  } catch (error) {
+    console.error(error);
+  }
+
+  try {
+    await notifyLine(newHouses);
+  } catch (error) {
+    console.error(error);
+  }
 }
