@@ -14,18 +14,18 @@ const generateHouseMessage = (house: DataItem) => {
   return `
 新房源來了！ 🏠 \`${house.title || ""}\`
 
-💰 \`${house.price}\`${house.price_unit}
+💰 \`${house.price}\` ${house.price_unit}
 類型：${house.kind_name} 📐 ${house.area} 坪 🦶 在 ${house.floor_str}
 ${house.community} 🗺️ ${house.location}
 
 📌Google Maps：https://www.google.com/maps/search/?api=1&query=${house.location}
 
-- ${house.refresh_time} 更新
+👉 👉 👉 ${house.refresh_time} 更新
 
 🌍打開網站：https://rent.591.com.tw/home/${house.post_id}
 📱手機 App：${mobileUrl}
 \`${house.rent_tag?.map((tag) => tag.name)}\`
-昨天有 ${house.yesterday_hit} 人瀏覽
+👀 昨天有 ${house.yesterday_hit} 人瀏覽
 `;
 };
 
