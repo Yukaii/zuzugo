@@ -312,3 +312,89 @@ interface FavData {
   posttime: number;
   count: number;
 }
+
+export interface FacebookGroupPostData {
+  qid: string;
+  mf_story_key: string;
+  top_level_post_id: string;
+  tl_objid: string;
+  content_owner_id_new: string;
+  original_content_id: string;
+  original_content_owner_id: string;
+  page_id: string;
+  src: number;
+  photo_id: string;
+  story_location: number;
+  attached_story_attachment_style: string;
+  filter: string;
+  ott: string;
+  sty: number;
+  attached_story_type: string;
+  attached_story_attachment_type: string;
+  page_insights: Page_insights;
+  actrs: string;
+  tds_flgs: number;
+  ftmd_400706: string;
+  tn: string;
+}
+
+interface Page_insights {
+  [key: string]: PageInsight | GroupInsight;
+}
+
+export interface PageInsight {
+  page_id: string;
+  page_id_type: string;
+  actor_id: string;
+  attached_story: Attached_story;
+  dm: Dm;
+  psn: string;
+  role: number;
+  sl: number;
+  targets: TargetsItem[];
+}
+interface Attached_story {
+  page_id: string;
+  page_id_type: string;
+  actor_id: string;
+  dm: Dm;
+  psn: string;
+  post_context: Post_context;
+  role: number;
+  sl: number;
+}
+interface Dm {
+  isShare: number;
+  originalPostOwnerID: number;
+}
+interface Post_context {
+  object_fbtype: number;
+  publish_time: number;
+  story_name: string;
+  story_fbid: string[];
+}
+interface TargetsItem {
+  actor_id: string;
+  page_id: string;
+  post_id: string;
+  role: number;
+  share_id: number;
+}
+
+export interface GroupInsight {
+  page_id: string;
+  page_id_type: string;
+  actor_id: string;
+  dm: Dm;
+  psn: string;
+  post_context: Group_Post_context;
+  role: number;
+  sl: number;
+}
+
+interface Group_Post_context {
+  object_fbtype: number;
+  publish_time: number;
+  story_name: string;
+  story_fbid: string[];
+}
