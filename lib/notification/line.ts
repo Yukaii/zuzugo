@@ -44,6 +44,6 @@ export async function notify(newHouses: DataItem[]) {
   }
 
   for (const message of messages) {
-    await sendLineNotify(message.message, message.cover, config.tokenLine);
+    await sendLineNotify(message.message, message.cover);
   }
 }
