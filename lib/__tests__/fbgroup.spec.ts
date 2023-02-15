@@ -20,6 +20,4 @@ test("getPostList should return array of post data", async function () {
   expect(typeof post.author).toBe("string");
   expect(typeof post.content).toBe("string");
   expect(typeof post.publishTime).toBe("number");
-
-  console.log(posts);
 });
