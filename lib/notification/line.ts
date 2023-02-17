@@ -12,10 +12,10 @@ const generateHouseMessage = (house: DataItem) => {
   const coverPhoto = getCoverPhoto(house);
 
   return `
-新房源來了！ 🏠 **\`${house.title || ""}\`**
+新房源來了！ 🏠 \`${house.title || ""}\`
 
-💰 ***\`${house.price}\`*** ${house.price_unit}
-*類型*：${house.kind_name} 📐 **${house.area}** 坪 🦶 在 ${house.floor_str}
+💰 \`${house.price}\` ${house.price_unit}
+類型：${house.kind_name} 📐 ${house.area} 坪 🦶 在 ${house.floor_str}
 ${house.community} 🗺️ ${house.location}
 
 *📌Google Map*
