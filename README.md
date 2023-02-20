@@ -2,7 +2,11 @@
 
 抓取 591 最新租屋資訊，並提供聊天機器人通知（可簡易的擴充）
 
-![slack-bot](./docs/assets/slack-bot.png)
+## Screenshots
+
+|                  Line Notify                  |                 Slack Bot                 |
+| :-------------------------------------------: | :---------------------------------------: |
+| ![line-notify](./docs/assets/line-notify.png) | ![slack-bot](./docs/assets/slack-bot.png) |
 
 ## Roadmap
 
@@ -29,7 +33,7 @@ cp .env.example .env.local
 - 豬豬快租 -> zuzu.com.tw
 - [bbgo](https://github.com/c9s/bbgo) -> BB 狗，雖然本專案沒有半行 Go...
 
-![yeah](http://1.bp.blogspot.com/-h-sB7bTbyDo/XmerCeUWoCI/AAAAAAAALSU/3DmKLm3ZXh8NUecPNKHB0YCVrUd51MbRQCK4BGAYYCw/s1600/noname.png)
+![yeah](https://1.bp.blogspot.com/-h-sB7bTbyDo/XmerCeUWoCI/AAAAAAAALSU/3DmKLm3ZXh8NUecPNKHB0YCVrUd51MbRQCK4BGAYYCw/s1600/noname.png)
 
 ## License
 
