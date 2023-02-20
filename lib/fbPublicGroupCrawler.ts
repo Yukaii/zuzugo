@@ -1,5 +1,6 @@
 import * as cheerio from "cheerio";
 import createDOMPurify from "dompurify";
+import { bootstrap } from "global-agent";
 import { got } from "got";
 import { JSDOM } from "jsdom";
 import unescape from "lodash/unescape";
@@ -8,6 +9,10 @@ import { FacebookGroupPostData, GroupInsight } from "./types";
 
 const window = new JSDOM("").window;
 const DOMPurify = createDOMPurify(window as any);
+
+if (process.env.GLOBAL_AGENT_HTTP_PROXY) {
+  bootstrap();
+}
 
 export async function getPosts(groupId: string) {
   const groupUrl = `https://mbasic.facebook.com/groups/${groupId}`;

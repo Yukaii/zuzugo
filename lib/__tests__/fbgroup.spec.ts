@@ -1,7 +1,7 @@
 import { getPosts } from "@/lib/fbPublicGroupCrawler";
 
 test("getPostList should return array of post data", async function () {
-  // https://www.facebook.com/groups/464870710346711
+  // https://mbasic.facebook.com/groups/464870710346711
   const posts = await getPosts("464870710346711");
 
   expect(Array.isArray(posts)).toBe(true);
