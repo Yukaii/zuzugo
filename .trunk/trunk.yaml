@@ -1,16 +1,16 @@
 version: 0.1
 cli:
-  version: 1.4.1
+  version: 1.5.0
 plugins:
   sources:
     - id: trunk
-      ref: v0.0.10
+      ref: v0.0.11
       uri: https://github.com/trunk-io/plugins
 lint:
   enabled:
     - git-diff-check
     - prettier@2.8.4
-    - eslint@8.33.0
+    - eslint@8.34.0
     - gitleaks@8.15.3
     - oxipng@8.0.0
     - actionlint@1.6.23
@@ -21,6 +21,8 @@ runtimes:
     - go@1.18.3
     - node@18.12.1
 actions:
+  disabled:
+    - trunk-fmt-pre-commit
   enabled:
     - trunk-announce
     - trunk-check-pre-push
