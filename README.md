@@ -1,5 +1,7 @@
 # Zuzugo 租租狗
 
+![logo](./docs/assets/zuzugo_logo.png)
+
 抓取 591 最新租屋資訊，並提供聊天機器人通知（可簡易的擴充）
 
 ## Screenshots
