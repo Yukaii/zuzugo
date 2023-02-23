@@ -1,11 +1,3 @@
-import { Inngest } from "inngest";
+import { dispatchAll, notifyLineNotification, notifySlackNotification } from "@/lib/notification";
 
-export const inngest = new Inngest({
-  name: "Zuzugo",
-});
-
-const myFn = inngest.createFunction("My BG Fn", "your.event.name", async ({ event }) => {
-  return "hello!";
-});
-
-export const fns = [myFn];
+export const fns = [dispatchAll, notifyLineNotification, notifySlackNotification];

@@ -1,4 +1,6 @@
 import { config } from "../config";
+import { inngest } from "../inngest/client";
+import { createDefaultHouseStore } from "../store";
 import { DataItem } from "../types";
 
 import { notify as notifyConsole } from "./console";
@@ -10,15 +12,53 @@ export async function notifyTargets(newHouses: DataItem[]) {
     notifyConsole(newHouses);
   }
 
-  try {
-    await notifySlack(newHouses);
-  } catch (error) {
-    console.error(error);
-  }
-
-  try {
-    await notifyLine(newHouses);
-  } catch (error) {
-    console.error(error);
-  }
+  inngest.send("notification/dispatchAll", {
+    data: {
+      houseIds: newHouses.map((house) => house.post_id),
+    },
+  });
 }
+
+export const dispatchAll = inngest.createFunction(
+  "Notify targets",
+  "notification/dispatchAll",
+  async ({ event }) => {
+    await inngest.send("notification/notifyLine", {
+      data: event.data,
+    });
+
+    await inngest.send("notification/notifySlack", {
+      data: event.data,
+    });
+  }
+);
+
+export const notifyLineNotification = inngest.createFunction(
+  "Notify Line",
+  "notification/notifyLine",
+  async ({ event }) => {
+    const store = createDefaultHouseStore();
+    const houses = await store.getWithIds(event.data.houseIds);
+
+    try {
+      await notifyLine(houses);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+);
+
+export const notifySlackNotification = inngest.createFunction(
+  "Notify Slack",
+  "notification/notifySlack",
+  async ({ event }) => {
+    const store = createDefaultHouseStore();
+    const houses = await store.getWithIds(event.data.houseIds);
+
+    try {
+      await notifySlack(houses);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+);
