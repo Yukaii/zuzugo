@@ -31,3 +31,13 @@ jobs:
 
       - name: Run tests
         run: pnpm test
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/setup-repo
+
+      - name: Run build
+        run: pnpm run build
