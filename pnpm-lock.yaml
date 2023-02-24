@@ -8,6 +8,7 @@ patchedDependencies:
 specifiers:
   '@faker-js/faker': ^7.6.0
   '@next/font': 13.1.6
+  '@prisma/client': ^4.10.1
   '@seratch_/bolt-http-runner': ^1.0.3
   '@slack/bolt': ^3.12.2
   '@slack/oauth': ^2.6.0
@@ -33,6 +34,7 @@ specifiers:
   mongodb-memory-server: ^8.11.4
   next: 13.1.6
   prettier: ^2.8.3
+  prisma: ^4.10.1
   react: 18.2.0
   react-dom: 18.2.0
   tough-cookie: ^4.1.2
@@ -44,6 +46,7 @@ specifiers:
 
 dependencies:
   '@next/font': 13.1.6
+  '@prisma/client': 4.10.1_prisma@4.10.1
   '@seratch_/bolt-http-runner': 1.0.3
   '@slack/bolt': 3.12.2
   '@slack/oauth': 2.6.0
@@ -77,6 +80,7 @@ devDependencies:
   jest: 29.4.1_zfha7dvnw4nti6zkbsmhmn6xo4
   mongodb-memory-server: 8.11.4
   prettier: 2.8.3
+  prisma: 4.10.1
   ts-jest: 29.0.5_wrz2f4catxnbofknv5bs36jgqa
   ts-node: 10.9.1_bdgp3l2zgaopogaavxusmetvge
   ts-to-zod: 2.0.1
@@ -1852,6 +1856,28 @@ packages:
       tiny-glob: 0.2.9
       tslib: 2.5.0
     dev: false
+
+  /@prisma/client/4.10.1_prisma@4.10.1:
+    resolution: {integrity: sha512-VonXLJZybdt8e5XZH5vnIGCRNnIh6OMX1FS3H/yzMGLT3STj5TJ/OkMcednrvELgk8PK89Vo3aSh51MWNO0axA==}
+    engines: {node: '>=14.17'}
+    requiresBuild: true
+    peerDependencies:
+      prisma: '*'
+    peerDependenciesMeta:
+      prisma:
+        optional: true
+    dependencies:
+      '@prisma/engines-version': 4.10.1-2.aead147aa326ccb985dcfed5b065b4fdabd44b19
+      prisma: 4.10.1
+    dev: false
+
+  /@prisma/engines-version/4.10.1-2.aead147aa326ccb985dcfed5b065b4fdabd44b19:
+    resolution: {integrity: sha512-tsjTho7laDhf9EJ9EnDxAPEf7yrigSMDhniXeU4YoWc7azHAs4GPxRi2P9LTFonmHkJLMOLjR77J1oIP8Ife1w==}
+    dev: false
+
+  /@prisma/engines/4.10.1:
+    resolution: {integrity: sha512-B3tcTxjx196nuAu1GOTKO9cGPUgTFHYRdkPkTS4m5ptb2cejyBlH9X7GOfSt3xlI7p4zAJDshJP4JJivCg9ouA==}
+    requiresBuild: true
 
   /@rushstack/eslint-patch/1.2.0:
     resolution: {integrity: sha512-sXo/qW2/pAcmT43VoRKOJbDOfV3cYpq3szSVfIThQXNt+E4DfKj361vaAt3c88U5tPUxzEswam7GW48PJqtKAg==}
@@ -6055,6 +6081,14 @@ packages:
       ansi-styles: 5.2.0
       react-is: 18.2.0
     dev: true
+
+  /prisma/4.10.1:
+    resolution: {integrity: sha512-0jDxgg+DruB1kHVNlcspXQB9au62IFfVg9drkhzXudszHNUAQn0lVuu+T8np0uC2z1nKD5S3qPeCyR8u5YFLnA==}
+    engines: {node: '>=14.17'}
+    hasBin: true
+    requiresBuild: true
+    dependencies:
+      '@prisma/engines': 4.10.1
 
   /process-nextick-args/2.0.1:
     resolution: {integrity: sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==}
