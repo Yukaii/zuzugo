@@ -12,7 +12,7 @@ export async function notifyTargets(newHouses: DataItem[]) {
     notifyConsole(newHouses);
   }
 
-  inngest.send("notification/dispatchAll", {
+  await inngest.send("notification/dispatchAll", {
     data: {
       houseIds: newHouses.map((house) => house.post_id),
     },
