@@ -53,3 +53,28 @@ test("it can read data from the record", async function () {
 
   expect(insertedHouse.data as Prisma.JsonObject).toHaveProperty("post_id", house.post_id);
 });
+
+it("should return empty array if no new houses is inserted", async function () {
+  const houses = Array.from({ length: 10 }, houseFactory);
+
+  await _591HouseRepository.insertHouses(houses);
+
+  const newHouses = await _591HouseRepository.insertHouses(houses);
+
+  expect(newHouses.length).toBe(0);
+});
+
+it("should only return newly inserted house ids", async function () {
+  const houses = Array.from({ length: 10 }, houseFactory);
+
+  await _591HouseRepository.insertHouses(houses);
+
+  const newHouses = Array.from({ length: 10 }, houseFactory);
+  const randomPickedOldHouses = houses.slice(0, 5);
+
+  const allHousesToInsert = [...newHouses, ...randomPickedOldHouses];
+
+  const newHouseIds = await _591HouseRepository.insertHouses(allHousesToInsert);
+
+  expect(newHouseIds.length).toBe(newHouses.length);
+});

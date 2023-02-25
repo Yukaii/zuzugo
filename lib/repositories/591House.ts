@@ -6,10 +6,12 @@ import { DataItem } from "@/lib/types";
 const HOUSE_SOURCE = "591";
 
 export class _591HouseRepository {
-  static insertHouses(houses: DataItem[]) {
+  static async insertHouses(houses: DataItem[]) {
     const houseIds = houses.map((house) => String(house.post_id));
 
-    return prisma.$transaction(async (tx) => {
+    let insertedIds = [] as string[];
+
+    await prisma.$transaction(async (tx) => {
       const existingHouses = await tx.house.findMany({
         where: {
           pk: {
@@ -29,10 +31,14 @@ export class _591HouseRepository {
           source: HOUSE_SOURCE,
         }));
 
+      insertedIds = housesToInsert.map((house) => house.pk);
+
       return tx.house.createMany({
         data: housesToInsert,
       });
     });
+
+    return insertedIds;
   }
 
   static async getHousesByIds(houseIds: string[]) {
