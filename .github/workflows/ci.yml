@@ -24,6 +24,19 @@ jobs:
   test:
     name: Test
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        # Docker Hub image
+        image: postgres
+        # Provide the password for postgres
+        env:
+          POSTGRES_PASSWORD: postgres
+        # Set health checks to wait until postgres has started
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     steps:
       - uses: actions/checkout@v3
@@ -31,3 +44,5 @@ jobs:
 
       - name: Run tests
         run: pnpm test
+        env:
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
