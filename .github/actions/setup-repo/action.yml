@@ -36,3 +36,7 @@ runs:
     - name: Install dependencies
       shell: bash
       run: pnpm install
+
+    - name: Generate prisma client
+      shell: bash
+      run: pnpm prisma generate
