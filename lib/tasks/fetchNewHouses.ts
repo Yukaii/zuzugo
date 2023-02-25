@@ -8,9 +8,8 @@ async function fetchAndSaveNewHouses() {
 }
 
 export const fetchNewHousesFn = inngest.createFunction(
-  "Fetch New Houses",
+  { name: "Fetch New Houses" },
   {
-    event: "tasks/fetchNewHouses",
     // every 5 minutes
     cron: "*/5 * * * *",
   },
