@@ -21,10 +21,16 @@ type NotifySlack = {
   };
 };
 
+type FetchNewHouses = {
+  name: "tasks/fetchNewHouses";
+  data: {};
+};
+
 type Events = {
   "notification/dispatchAll": DispatchAll;
   "notification/notifyLine": NotifyLine;
   "notification/notifySlack": NotifySlack;
+  "tasks/fetchNewHouses": FetchNewHouses;
 };
 
 export const inngest = new Inngest<Events>({

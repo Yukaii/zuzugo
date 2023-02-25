@@ -60,5 +60,3 @@ export class _591HouseRepository {
     });
   }
 }
-
-export default _591HouseRepository;
