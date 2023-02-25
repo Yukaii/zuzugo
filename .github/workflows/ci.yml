@@ -46,6 +46,8 @@ jobs:
       - uses: ./.github/actions/setup-repo
 
       - name: Run tests
-        run: pnpm test
+        run: |
+          pnpm prisma db push
+          pnpm test
         env:
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
