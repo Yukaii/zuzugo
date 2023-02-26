@@ -1,21 +1,17 @@
 import * as cheerio from "cheerio";
+import getUa from "fake-useragent";
 import { got } from "got";
 import { CookieJar } from "tough-cookie";
 
 import { config } from "./config";
 import { DataItem, RListAPI } from "./types";
 
-const ua = require("fake-useragent");
-const request = require("request");
-
 const cookieJar = new CookieJar();
 
 const client = got.extend({
   cookieJar,
   headers: {
-    "User-Agent":
-      // "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36",
-      `${ua}`,
+    "User-Agent": `${getUa()}`,
   },
 });
 
