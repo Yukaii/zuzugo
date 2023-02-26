@@ -25,6 +25,7 @@ specifiers:
   eslint-config-prettier: ^8.6.0
   eslint-plugin-import: ^2.27.5
   eslint-plugin-jest: ^27.2.1
+  fake-useragent: ^1.0.1
   got: npm:got-cjs@^12.5.4
   inngest: ^1.2.0
   inngest-cli: ^0.10.0
@@ -56,6 +57,7 @@ dependencies:
   cheerio: 1.0.0-rc.12
   eslint: 8.33.0
   eslint-config-next: 13.1.6_4vsywjlpuriuw3tl5oq6zy5a64
+  fake-useragent: 1.0.1
   got: /got-cjs/12.5.4
   inngest: 1.2.0
   jsx-slack: 5.3.0_ful7f5aqgo3vohqsfpm3hvy52q
@@ -3708,6 +3710,10 @@ packages:
       vary: 1.1.2
     transitivePeerDependencies:
       - supports-color
+    dev: false
+
+  /fake-useragent/1.0.1:
+    resolution: {integrity: sha512-BOQh1TM//DhrVaeZ+b3w3s4E40rfYcDTn5aoSM2w1xVsZVGglNOzPR5H8KDO8NmF8sT4ppxyb4/MHGIHfZsVDA==}
     dev: false
 
   /fast-deep-equal/3.1.3:
