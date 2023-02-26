@@ -51,3 +51,14 @@ jobs:
           pnpm test
         env:
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/setup-repo
+
+      - name: Run build
+        run: pnpm run build
