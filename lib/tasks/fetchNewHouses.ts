@@ -11,7 +11,15 @@ async function fetchAndSaveNewHouses() {
     notifyConsole(houses);
   }
 
-  return _591HouseRepository.insertHouses(houses);
+  const houseIds = await _591HouseRepository.insertHouses(houses);
+
+  if (config.newNotificationSystem && houseIds.length > 0) {
+    await inngest.send("notification/dispatchAll", {
+      data: {
+        houseIds,
+      },
+    });
+  }
 }
 
 export const fetchNewHousesFn = inngest.createFunction(
@@ -21,14 +29,6 @@ export const fetchNewHousesFn = inngest.createFunction(
     cron: "*/5 * * * *",
   },
   async () => {
-    const houseIds = await fetchAndSaveNewHouses();
-
-    if (config.newNotificationSystem) {
-      await inngest.send("notification/dispatchAll", {
-        data: {
-          houseIds,
-        },
-      });
-    }
+    await fetchAndSaveNewHouses();
   }
 );
