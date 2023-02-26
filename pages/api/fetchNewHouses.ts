@@ -3,10 +3,9 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { getHouseList } from "@/lib/api";
 import { config } from "@/lib/config";
 import { notifyTargets } from "@/lib/notification";
-import { HouseStore } from "@/lib/store";
-import { DataItem } from "@/lib/types";
+import { createDefaultHouseStore } from "@/lib/store";
 
-const store = new HouseStore<DataItem, "post_id">({});
+const store = createDefaultHouseStore();
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   // method guard
