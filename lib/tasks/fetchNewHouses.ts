@@ -1,10 +1,17 @@
 import { getHouseList } from "@/lib/api";
+import { config } from "@/lib/config";
 import { inngest } from "@/lib/inngest/client";
+import { notify as notifyConsole } from "@/lib/notification/console";
 import { _591HouseRepository } from "@/lib/repositories/591House";
 
 async function fetchAndSaveNewHouses() {
   const houses = await getHouseList();
-  await _591HouseRepository.insertHouses(houses);
+
+  if (!config.production) {
+    notifyConsole(houses);
+  }
+
+  return _591HouseRepository.insertHouses(houses);
 }
 
 export const fetchNewHousesFn = inngest.createFunction(
@@ -14,8 +21,14 @@ export const fetchNewHousesFn = inngest.createFunction(
     cron: "*/5 * * * *",
   },
   async () => {
-    await fetchAndSaveNewHouses();
+    const houseIds = await fetchAndSaveNewHouses();
 
-    // TODO: call notifyAll
+    if (config.newNotificationSystem) {
+      await inngest.send("notification/dispatchAll", {
+        data: {
+          houseIds,
+        },
+      });
+    }
   }
 );

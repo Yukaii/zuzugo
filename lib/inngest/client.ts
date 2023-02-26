@@ -3,21 +3,21 @@ import { Inngest } from "inngest";
 type DispatchAll = {
   name: "notification/dispatchAll";
   data: {
-    houseIds: number[];
+    houseIds: string[];
   };
 };
 
 type NotifyLine = {
   name: "notification/notifyLine";
   data: {
-    houseIds: number[];
+    houseIds: string[];
   };
 };
 
 type NotifySlack = {
   name: "notification/notifySlack";
   data: {
-    houseIds: number[];
+    houseIds: string[];
   };
 };
 
