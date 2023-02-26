@@ -31,3 +31,4 @@ merge:
   required_statuses:
     - Lint
     - Test
+    - Build
