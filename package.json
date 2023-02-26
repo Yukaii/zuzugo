@@ -9,7 +9,6 @@
     "lint": "next lint",
     "fmt": "prettier --write .",
     "test": "jest",
-    "zod:gen": "ts-to-zod lib/types.ts lib/zod.ts",
     "vercel-build": "prisma generate && prisma migrate deploy && next build"
   },
   "dependencies": {
@@ -50,8 +49,7 @@
     "prettier": "^2.8.3",
     "prisma": "^4.10.1",
     "ts-jest": "^29.0.5",
-    "ts-node": "^10.9.1",
-    "ts-to-zod": "^2.0.1"
+    "ts-node": "^10.9.1"
   },
   "pnpm": {
     "patchedDependencies": {
