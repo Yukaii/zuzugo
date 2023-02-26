@@ -1,6 +1,6 @@
 import { config } from "../config";
 import { inngest } from "../inngest/client";
-import { createDefaultHouseStore } from "../store";
+import { _591HouseRepository } from "../repositories/591House";
 import { DataItem } from "../types";
 
 import { notify as notifyConsole } from "./console";
@@ -14,7 +14,7 @@ export async function notifyTargets(newHouses: DataItem[]) {
 
   await inngest.send("notification/dispatchAll", {
     data: {
-      houseIds: newHouses.map((house) => house.post_id),
+      houseIds: newHouses.map((house) => String(house.post_id)),
     },
   });
 }
@@ -37,11 +37,10 @@ export const notifyLineNotification = inngest.createFunction(
   "Notify Line",
   "notification/notifyLine",
   async ({ event }) => {
-    const store = createDefaultHouseStore();
-    const houses = await store.getWithIds(event.data.houseIds);
+    const houses = await _591HouseRepository.getHousesByIds(event.data.houseIds);
 
     try {
-      await notifyLine(houses);
+      await notifyLine(houses.map((house) => house.data as DataItem));
     } catch (error) {
       console.error(error);
     }
@@ -52,11 +51,10 @@ export const notifySlackNotification = inngest.createFunction(
   "Notify Slack",
   "notification/notifySlack",
   async ({ event }) => {
-    const store = createDefaultHouseStore();
-    const houses = await store.getWithIds(event.data.houseIds);
+    const houses = await _591HouseRepository.getHousesByIds(event.data.houseIds);
 
     try {
-      await notifySlack(houses);
+      await notifySlack(houses.map((house) => house.data as DataItem));
     } catch (error) {
       console.error(error);
     }

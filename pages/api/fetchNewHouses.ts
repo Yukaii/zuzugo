@@ -26,6 +26,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(401).json({ message: "Unauthorized" });
   }
 
+  if (config.newNotificationSystem) {
+    return res.status(200).json({ message: "OK" });
+  }
+
   try {
     const houses = await getHouseList();
     const newHouses = await store.refreshWithHouses(houses);

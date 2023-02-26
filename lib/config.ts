@@ -41,4 +41,5 @@ export const config = {
   apiSecret,
   tokenLine,
   production: process.env.NODE_ENV === "production",
+  newNotificationSystem: process.env.ZUZUGO_NEW_NOTIFICATION === "true",
 };
