@@ -196,20 +196,22 @@ const infoItemSchema = z.object({
   key: z.string(),
 });
 
-const childrenItemSchema: z.ZodSchema<ChildrenItem> = z.lazy(() =>
-  z.object({
-    type: z.string().optional(),
-    name: z.string(),
-    distance: z.number().optional(),
-    distanceTxt: z.string().optional(),
-    key: z.string().optional(),
-    children: z.array(childrenItemSchema).optional(),
-    lat: z.string().optional(),
-    lng: z.string().optional(),
-    trading_area_id: z.number().optional(),
-    trading_area_distance: z.number().optional(),
-  })
-);
+export const baseChildrenItemSchema = z.object({
+  type: z.string().optional(),
+  name: z.string(),
+  distance: z.number().optional(),
+  distanceTxt: z.string().optional(),
+  key: z.string().optional(),
+  lat: z.string().optional(),
+  lng: z.string().optional(),
+  trading_area_id: z.number().optional(),
+  trading_area_distance: z.number().optional(),
+});
+
+// https://github.com/colinhacks/zod#recursive-types
+const childrenItemSchema: z.ZodType<ChildrenItem> = baseChildrenItemSchema.extend({
+  children: z.lazy(() => childrenItemSchema.array().optional()),
+});
 
 const mapDataItemSchema = z.object({
   name: z.string(),
