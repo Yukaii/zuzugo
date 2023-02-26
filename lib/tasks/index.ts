@@ -1,0 +1,1 @@
+export { fetchNewHousesFn } from "./fetchNewHouses";

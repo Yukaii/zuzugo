@@ -23,7 +23,7 @@
 
 ```bash
 pnpm install
-cp .env.example .env.local
+cp .env.example .env
 ```
 
 ## Previous Works

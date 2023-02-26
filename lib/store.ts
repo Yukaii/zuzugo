@@ -1,5 +1,7 @@
 import { Db, MongoClient } from "mongodb";
 
+import { DataItem } from "./types";
+
 const MAX_LIST_LENGTH = 100;
 
 type StoreOptions = {
@@ -102,7 +104,21 @@ export class HouseStore<T, K extends keyof T> {
     await collection.deleteMany();
   }
 
+  async getWithIds(houseIds: unknown[]): Promise<T[]> {
+    const collection = this.db.collection(this.collectionName);
+
+    const housesInStore = await collection
+      .find({ [this.indexName as string]: { $in: houseIds } })
+      .toArray();
+
+    return housesInStore as T[];
+  }
+
   async disconnect() {
     return this.client.close();
   }
+}
+
+export function createDefaultHouseStore() {
+  return new HouseStore<DataItem, "post_id">({});
 }
