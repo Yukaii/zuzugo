@@ -24,6 +24,7 @@
     "cheerio": "1.0.0-rc.12",
     "eslint": "8.33.0",
     "eslint-config-next": "13.1.6",
+    "fake-useragent": "^1.0.1",
     "got": "npm:got-cjs@^12.5.4",
     "inngest": "^1.2.0",
     "jsx-slack": "^5.3.0",
