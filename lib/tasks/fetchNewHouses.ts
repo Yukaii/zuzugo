@@ -13,7 +13,7 @@ async function fetchAndSaveNewHouses() {
 
   const houseIds = await _591HouseRepository.insertHouses(houses);
 
-  if (config.newNotificationSystem && houseIds.length > 0) {
+  if (houseIds.length > 0) {
     await inngest.send("notification/dispatchAll", {
       data: {
         houseIds,
