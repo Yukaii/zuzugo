@@ -1,1 +1,1 @@
-export { fetchNewHousesFn } from "./fetchNewHouses";
+export { fetchNewHousesFn, fetchNewHousesEvent } from "./fetchNewHouses";

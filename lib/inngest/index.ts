@@ -1,4 +1,4 @@
 import { dispatchAll, notifyLineNotification, notifySlackNotification } from "@/lib/notification";
-import { fetchNewHousesFn } from "@/lib/tasks";
+import { fetchNewHousesFn, fetchNewHousesEvent } from "@/lib/tasks";
 
-export const fns = [dispatchAll, notifyLineNotification, notifySlackNotification, fetchNewHousesFn];
+export const fns = [dispatchAll, notifyLineNotification, notifySlackNotification, fetchNewHousesFn, fetchNewHousesEvent];
