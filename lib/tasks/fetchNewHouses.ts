@@ -32,3 +32,11 @@ export const fetchNewHousesFn = inngest.createFunction(
     await fetchAndSaveNewHouses();
   }
 );
+
+export const fetchNewHousesEvent = inngest.createFunction(
+  "Fetch New Houses Event",
+  "tasks/fetchNewHouses",
+  async () => {
+    await fetchAndSaveNewHouses();
+  }
+);
