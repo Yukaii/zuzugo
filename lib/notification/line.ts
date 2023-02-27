@@ -11,6 +11,10 @@ const generateHouseMessage = (house: DataItem) => {
 
   const coverPhoto = getCoverPhoto(house);
 
+  let rentTag;
+
+  house.rent_tag ? (rentTag = `\`${house.rent_tag?.map((tag) => tag.name)}\``) : (rentTag = ``);
+
   return `
 新房源來了！ 🏠 \`${house.title || ""}\`
 
@@ -28,7 +32,7 @@ https://rent.591.com.tw/home/${house.post_id}
 
 📱手機 App：${mobileUrl}
 
-\`${house.rent_tag?.map((tag) => tag.name)}\`
+${rentTag}
 
 *👀 昨天有 ${house.yesterday_hit} 人瀏覽*
 `;
