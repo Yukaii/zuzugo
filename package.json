@@ -12,6 +12,7 @@
     "vercel-build": "prisma generate && prisma migrate deploy && next build"
   },
   "dependencies": {
+    "@line/bot-sdk": "^7.5.2",
     "@next/font": "13.1.6",
     "@prisma/client": "^4.10.1",
     "@seratch_/bolt-http-runner": "^1.0.3",

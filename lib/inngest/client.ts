@@ -14,6 +14,11 @@ type NotifyLine = {
   };
 };
 
+type NotifyLineBot = {
+  name: "notification/notifyLineBot";
+  data: {};
+};
+
 type NotifySlack = {
   name: "notification/notifySlack";
   data: {
@@ -25,6 +30,7 @@ type Events = {
   "notification/dispatchAll": DispatchAll;
   "notification/notifyLine": NotifyLine;
   "notification/notifySlack": NotifySlack;
+  "notification/notifyLineBot": NotifyLineBot
 };
 
 export const inngest = new Inngest<Events>({

@@ -5,6 +5,7 @@ import { DataItem } from "../types";
 
 import { notify as notifyConsole } from "./console";
 import { notify as notifyLine } from "./line";
+import { sendLineBotMessage } from "./lineBot";
 import { notify as notifySlack } from "./slack";
 
 export async function notifyTargets(newHouses: DataItem[]) {
@@ -41,6 +42,18 @@ export const notifyLineNotification = inngest.createFunction(
 
     try {
       await notifyLine(houses.map((house) => house.data as DataItem));
+    } catch (error) {
+      console.error(error);
+    }
+  }
+);
+
+export const notifyLineBotNotification = inngest.createFunction(
+  "Notify Line Bot",
+  "notification/notifyLineBot",
+  async ({ event }) => {
+    try {
+      sendLineBotMessage()
     } catch (error) {
       console.error(error);
     }
