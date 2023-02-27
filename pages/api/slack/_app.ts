@@ -1,32 +1,23 @@
-import { AppRunner } from "@seratch_/bolt-http-runner";
-import { App, LogLevel } from "@slack/bolt";
+import { setupSlackApp } from "@/lib/slackApp";
+export { appRunner } from "@/lib/slackApp";
 
-export const appRunner = new AppRunner({
-  logLevel: LogLevel.DEBUG,
-  token: process.env.SLACK_BOT_TOKEN,
-  signingSecret: process.env.SLACK_SIGNING_SECRET!,
-  scopes: ["commands", "chat:write"],
-});
+setupSlackApp((app) => {
+  app.command("/zuzugo", async ({ ack, command, say, client }) => {
+    console.log(command.text);
 
-const app = new App(appRunner.appOptions());
-
-app.command("/zuzugo", async ({ ack, command, say, client }) => {
-  console.log(command.text);
-
-  await client.chat.postMessage({
-    blocks: [
-      {
-        type: "section",
-        text: {
-          type: "mrkdwn",
-          text: "*Hello*, _World!_",
+    await client.chat.postMessage({
+      blocks: [
+        {
+          type: "section",
+          text: {
+            type: "mrkdwn",
+            text: "*Hello*, _World!_",
+          },
         },
-      },
-    ],
-    channel: command.channel_id,
+      ],
+      channel: command.channel_id,
+    });
+
+    ack();
   });
-
-  ack();
 });
-
-appRunner.setup(app);
