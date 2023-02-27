@@ -1,7 +1,5 @@
 import url from "url";
 
-import { AppOptions } from "@slack/bolt";
-
 export function extractSearchParams(urlString: string) {
   const parsedUrl = url.parse(urlString);
   return parsedUrl.search || "";
