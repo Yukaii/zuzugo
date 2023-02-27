@@ -16,8 +16,8 @@ export function setupSlackApp(setupApp: (app: App) => void) {
 
   const baseAppOptions: AppOptions = {
     logLevel: LogLevel.DEBUG,
-    token: process.env.SLACK_BOT_TOKEN,
-    signingSecret: process.env.SLACK_SIGNING_SECRET!,
+    token: config.slackBotToken,
+    signingSecret: config.slackSigningSecret,
     scopes: ["commands", "chat:write"],
   };
 
