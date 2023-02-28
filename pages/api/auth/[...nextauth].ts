@@ -1,7 +1,8 @@
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import NextAuth from "next-auth";
+import NextAuth, { AuthOptions } from "next-auth";
 // eslint-disable-next-line import/no-unresolved
 import { AdapterAccount } from "next-auth/adapters";
+import { Provider } from "next-auth/providers";
 import SlackProvider from "next-auth/providers/slack";
 
 import { config } from "@/lib/config";
@@ -31,7 +32,7 @@ const getSlackProvider = () => {
   });
 };
 
-export default NextAuth({
+export const authOptions: AuthOptions = {
   adapter: {
     ...PrismaAdapter(prisma),
     linkAccount: async (data: AdapterAccount) => {
@@ -54,8 +55,13 @@ export default NextAuth({
       }
     },
   },
-  providers: [getSlackProvider()].filter(Boolean),
+  providers: [getSlackProvider()].filter(Boolean) as Provider[],
   session: {
     strategy: "database",
   },
-});
+  pages: {
+    signIn: "/auth/signin",
+  },
+};
+
+export default NextAuth(authOptions);

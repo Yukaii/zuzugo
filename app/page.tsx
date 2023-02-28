@@ -1,13 +1,20 @@
 import { Inter } from "@next/font/google";
 import Image from "next/image";
+import { getServerSession } from "next-auth/next";
 
 import styles from "./page.module.css";
 
+import { authOptions } from "pages/api/auth/[...nextauth]";
+
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Home() {
+export default async function Home() {
+  const session = await getServerSession(authOptions);
+
   return (
     <main className={styles.main}>
+      {JSON.stringify(session, null, 2)}
+
       <div className={styles.description}>
         <p>
           Get started by editing&nbsp;
