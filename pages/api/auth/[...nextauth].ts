@@ -55,11 +55,6 @@ export default NextAuth({
     },
   },
   providers: [getSlackProvider()].filter(Boolean),
-  events: {
-    linkAccount: async ({ account, user, profile }) => {
-      console.log("linkAccount", account, user, profile);
-    },
-  },
   session: {
     strategy: "database",
   },
