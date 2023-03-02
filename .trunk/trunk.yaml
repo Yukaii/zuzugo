@@ -9,7 +9,7 @@ plugins:
 lint:
   enabled:
     - git-diff-check
-    - gitleaks@8.15.3
+    - gitleaks@8.16.0
     - oxipng@8.0.0
     - actionlint@1.6.23
     - markdownlint@0.33.0
