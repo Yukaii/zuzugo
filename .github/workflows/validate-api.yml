@@ -1,7 +1,7 @@
 name: Validate API
 on:
   schedule:
-    - cron: '0 0 * * *'
+    - cron: "0 0 * * *"
   workflow_dispatch:
 
 jobs:
@@ -13,4 +13,4 @@ jobs:
       - uses: ./.github/actions/setup-repo
 
       - name: RUn validation tests
-        run: pnpm test -- -t "validate"
+        run: pnpm run test-real -- -t "validate"
