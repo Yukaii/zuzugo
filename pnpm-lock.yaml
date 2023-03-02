@@ -22,6 +22,7 @@ specifiers:
   '@types/react-dom': 18.0.10
   '@types/tough-cookie': ^4.0.2
   cheerio: 1.0.0-rc.12
+  cross-env: ^7.0.3
   eslint: 8.33.0
   eslint-config-next: 13.1.6
   eslint-config-prettier: ^8.6.0
@@ -58,6 +59,7 @@ dependencies:
   '@types/react': 18.0.27
   '@types/react-dom': 18.0.10
   cheerio: 1.0.0-rc.12
+  cross-env: 7.0.3
   eslint: 8.33.0
   eslint-config-next: 13.1.6_4vsywjlpuriuw3tl5oq6zy5a64
   fake-useragent: 1.0.1
@@ -2147,6 +2149,14 @@ packages:
   /create-require/1.1.1:
     resolution: {integrity: sha512-dcKFX3jn0MpIaXjisoRvexIJVEKzaq7z2rZKxf+MSr9TkdmHmsU4m2lcLojrj/FHl8mk5VxMmYA+ftRkP/3oKQ==}
     dev: true
+
+  /cross-env/7.0.3:
+    resolution: {integrity: sha512-+/HKd6EgcQCJGh2PSjZuUitQBQynKor4wrFbRg4DtAgS1aWO+gU52xpH7M9ScGgXSYmAVS9bIJ8EzuaGw0oNAw==}
+    engines: {node: '>=10.14', npm: '>=6', yarn: '>=1'}
+    hasBin: true
+    dependencies:
+      cross-spawn: 7.0.3
+    dev: false
 
   /cross-fetch/3.1.5:
     resolution: {integrity: sha512-lvb1SBsI0Z7GDwmuid+mU3kWVBwTVUbe7S0H52yaaAdQOXq2YktTCZdlAcNKFzE6QtRz0snpw9bNiPeOIkkQvw==}

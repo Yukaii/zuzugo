@@ -1,9 +1,11 @@
 import { getToken, getHouseList } from "@/lib/api";
 import { server } from "@/tests/mocks/server";
 
-beforeAll(() => server.listen());
-afterEach(() => server.resetHandlers());
-afterAll(() => server.close());
+if (!process.env.ZUZUGO_TEST_REALWORLD) {
+  beforeAll(() => server.listen());
+  afterEach(() => server.resetHandlers());
+  afterAll(() => server.close());
+}
 
 test("getToken should return string results", async function () {
   const csrfToken = await getToken();
