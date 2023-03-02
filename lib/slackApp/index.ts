@@ -32,6 +32,16 @@ export function setupSlackApp(setupApp: (app: App) => void) {
     scopes: ["commands", "chat:write", "incoming-webhook"],
     installerOptions: {
       directInstall: true,
+      callbackOptions: {
+        success(success, installOptions, req, res) {
+          // redirect to the app home page
+          res
+            .writeHead(302, {
+              Location: "/auth/signin?target=slack",
+            })
+            .end();
+        },
+      },
     },
     installationStore,
     redirectUri: config.slackRedirectUri,
