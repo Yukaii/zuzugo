@@ -9,8 +9,6 @@ const getCoverPhoto = (house: DataItem) => {
 const generateHouseMessage = (house: DataItem) => {
   const mobileUrl = `https://house591.page.link/?link=https://m.591.com.tw/v2/rent/${house.post_id}&apn=com.addcn.android.house591&amv=147&afl=https://www.591.com.tw/home/tools/app/android?id=com.addcn.android.house591&ifl=https://www.591.com.tw/home/tools/app/ios&isi=448156496&ibi=com.Addcn.house591&ipbi=com.Addcn.house591&efr=1`;
 
-  const coverPhoto = getCoverPhoto(house);
-
   const rentTag = house.rent_tag ? `\`${house.rent_tag?.map((tag) => tag.name)}\`` : "";
 
   return `
