@@ -7,7 +7,7 @@ import { prisma } from "@/lib/prisma";
 
 export let appRunner: AppRunner | undefined;
 
-const installationStore = new PrismaInstallationStore({
+export const installationStore = new PrismaInstallationStore({
   // The name `slackAppInstallation` can be different
   // if you use a different name in your Prisma schema
   prismaTable: prisma.slackAppInstallation,
@@ -24,7 +24,7 @@ export function setupSlackApp(setupApp: (app: App) => void) {
   }
 
   const baseAppOptions: AppOptions = {
-    logLevel: LogLevel.DEBUG,
+    logLevel: config.slackDevMode ? LogLevel.INFO : LogLevel.DEBUG,
     signingSecret: config.slackSigningSecret,
     clientId: config.slackClientId,
     clientSecret: config.slackClientSecret,
