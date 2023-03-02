@@ -41,9 +41,10 @@ export const config = {
   slackAppToken: process.env.SLACK_APP_TOKEN,
   slackBotToken: process.env.SLACK_BOT_TOKEN,
   slackSigningSecret: process.env.SLACK_SIGNING_SECRET,
-  enableSocketModeForDev: process.env.ENABLE_SOCKET_MODE_FOR_DEV === "true",
+  slackDevMode: process.env.SLACK_DEV_MODE === "true",
   slackClientId: process.env.SLACK_CLIENT_ID,
   slackClientSecret: process.env.SLACK_CLIENT_SECRET,
+  slackStateSecret: process.env.SLACK_STATE_SECRET,
 
   apiSecret,
   tokenLine,
