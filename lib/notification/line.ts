@@ -11,9 +11,7 @@ const generateHouseMessage = (house: DataItem) => {
 
   const coverPhoto = getCoverPhoto(house);
 
-  let rentTag;
-
-  house.rent_tag ? (rentTag = `\`${house.rent_tag?.map((tag) => tag.name)}\``) : (rentTag = ``);
+  const rentTag = house.rent_tag ? `\`${house.rent_tag?.map((tag) => tag.name)}\`` : "";
 
   return `
 新房源來了！ 🏠 \`${house.title || ""}\`
