@@ -45,6 +45,8 @@ export const config = {
   slackClientId: process.env.SLACK_CLIENT_ID,
   slackClientSecret: process.env.SLACK_CLIENT_SECRET,
   slackStateSecret: process.env.SLACK_STATE_SECRET,
+  slackRedirectUri: process.env.SLACK_REDIRECT_URI,
+  slackSlashCommand: process.env.SLACK_SLASH_COMMAND,
 
   apiSecret,
   tokenLine,

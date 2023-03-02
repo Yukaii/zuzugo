@@ -15,7 +15,7 @@ const installationStore = new PrismaInstallationStore({
 });
 
 export function setupSlackApp(setupApp: (app: App) => void) {
-  const isDevMode = config.enableSocketModeForDev;
+  const isDevMode = config.slackDevMode;
 
   if (isDevMode) {
     console.log(
@@ -25,15 +25,16 @@ export function setupSlackApp(setupApp: (app: App) => void) {
 
   const baseAppOptions: AppOptions = {
     logLevel: LogLevel.DEBUG,
-    token: config.slackBotToken,
     signingSecret: config.slackSigningSecret,
     clientId: config.slackClientId,
     clientSecret: config.slackClientSecret,
-    scopes: ["commands", "chat:write"],
+    stateSecret: config.slackStateSecret,
+    scopes: ["commands", "chat:write", "incoming-webhook"],
     installerOptions: {
       directInstall: true,
     },
     installationStore,
+    redirectUri: config.slackRedirectUri,
   };
 
   // before start
