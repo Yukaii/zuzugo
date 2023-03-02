@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "fmt": "prettier --write .",
-    "test-msw": "cross-env ZUZUGO_TEST_REALWORLD=false jest",
+    "test-mock": "cross-env ZUZUGO_TEST_REALWORLD=false jest",
     "test-real": "cross-env ZUZUGO_TEST_REALWORLD=true jest",
     "vercel-build": "prisma generate && prisma migrate deploy && next build"
   },
