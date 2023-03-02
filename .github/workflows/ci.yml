@@ -48,7 +48,7 @@ jobs:
       - name: Run tests
         run: |
           pnpm prisma db push
-          pnpm test
+          pnpm run test-mock
         env:
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
 
