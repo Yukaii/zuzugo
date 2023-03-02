@@ -12,26 +12,26 @@ const generateHouseMessage = (house: DataItem) => {
   const rentTag = house.rent_tag ? `\`${house.rent_tag?.map((tag) => tag.name)}\`` : "";
 
   return `
-新房源來了！ 🏠 \`${house.title || ""}\`
+    新房源來了！ 🏠 \`${house.title || ""}\`
 
-💰 \`${house.price}\` ${house.price_unit}
-類型：${house.kind_name} 📐 ${house.area} 坪 🦶 在 ${house.floor_str}
-${house.community} 🗺️ ${house.location}
+    💰 \`${house.price}\` ${house.price_unit}
+    類型：${house.kind_name} 📐 ${house.area} 坪 🦶 在 ${house.floor_str}
+    ${house.community} 🗺️ ${house.location}
 
-*📌Google Map*
-https://www.google.com/maps/search/?api=1&query=${house.location}
+    *📌Google Map*
+    https://www.google.com/maps/search/?api=1&query=${house.location}
 
-💡 ${house.refresh_time}更新
+    💡 ${house.refresh_time}更新
 
-==打開 🌍 網站==
-https://rent.591.com.tw/home/${house.post_id}
+    ==打開 🌍 網站==
+    https://rent.591.com.tw/home/${house.post_id}
 
-📱手機 App：${mobileUrl}
+    📱手機 App：${mobileUrl}
 
-${rentTag}
+    ${rentTag}
 
-*👀 昨天有 ${house.yesterday_hit} 人瀏覽*
-`;
+    *👀 昨天有 ${house.yesterday_hit} 人瀏覽*
+  `;
 };
 
 export async function notify(newHouses: DataItem[]) {
