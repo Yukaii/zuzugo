@@ -1,12 +1,21 @@
 import { AppRunner, AppRunnerOptions } from "@seratch_/bolt-http-runner";
+import { PrismaInstallationStore } from "@seratch_/bolt-prisma";
 import { App, AppOptions, LogLevel } from "@slack/bolt";
 
 import { config } from "@/lib/config";
+import { prisma } from "@/lib/prisma";
 
 export let appRunner: AppRunner | undefined;
 
+export const installationStore = new PrismaInstallationStore({
+  // The name `slackAppInstallation` can be different
+  // if you use a different name in your Prisma schema
+  prismaTable: prisma.slackAppInstallation,
+  clientId: process.env.SLACK_CLIENT_ID,
+});
+
 export function setupSlackApp(setupApp: (app: App) => void) {
-  const isDevMode = config.enableSocketModeForDev;
+  const isDevMode = config.slackDevMode;
 
   if (isDevMode) {
     console.log(
@@ -15,10 +24,27 @@ export function setupSlackApp(setupApp: (app: App) => void) {
   }
 
   const baseAppOptions: AppOptions = {
-    logLevel: LogLevel.DEBUG,
-    token: config.slackBotToken,
+    logLevel: config.slackDevMode ? LogLevel.INFO : LogLevel.DEBUG,
     signingSecret: config.slackSigningSecret,
-    scopes: ["commands", "chat:write"],
+    clientId: config.slackClientId,
+    clientSecret: config.slackClientSecret,
+    stateSecret: config.slackStateSecret,
+    scopes: ["commands", "chat:write", "incoming-webhook"],
+    installerOptions: {
+      directInstall: true,
+      callbackOptions: {
+        success(success, installOptions, req, res) {
+          // redirect to the app home page
+          res
+            .writeHead(302, {
+              Location: "/auth/signin?target=slack",
+            })
+            .end();
+        },
+      },
+    },
+    installationStore,
+    redirectUri: config.slackRedirectUri,
   };
 
   // before start

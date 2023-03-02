@@ -1,12 +1,27 @@
 import type { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
+import { useRouter } from "next/router";
 import { getServerSession } from "next-auth/next";
 import { getProviders, signIn } from "next-auth/react";
+import { useEffect } from "react";
 
 import { authOptions } from "../api/auth/[...nextauth]";
 
 export default function SignIn({
   providers,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  const router = useRouter();
+  const { target } = router.query;
+
+  useEffect(() => {
+    if (target) {
+      const provider = Object.values(providers).find((provider) => provider.id === target);
+
+      if (provider) {
+        signIn(provider.id);
+      }
+    }
+  }, [providers, target]);
+
   return (
     <>
       {Object.values(providers).map((provider) => (
