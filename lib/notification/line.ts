@@ -9,29 +9,29 @@ const getCoverPhoto = (house: DataItem) => {
 const generateHouseMessage = (house: DataItem) => {
   const mobileUrl = `https://house591.page.link/?link=https://m.591.com.tw/v2/rent/${house.post_id}&apn=com.addcn.android.house591&amv=147&afl=https://www.591.com.tw/home/tools/app/android?id=com.addcn.android.house591&ifl=https://www.591.com.tw/home/tools/app/ios&isi=448156496&ibi=com.Addcn.house591&ipbi=com.Addcn.house591&efr=1`;
 
-  const coverPhoto = getCoverPhoto(house);
+  const rentTag = house.rent_tag ? `\`${house.rent_tag?.map((tag) => tag.name)}\`` : "";
 
   return `
-新房源來了！ 🏠 \`${house.title || ""}\`
+    新房源來了！ 🏠 \`${house.title || ""}\`
 
-💰 \`${house.price}\` ${house.price_unit}
-類型：${house.kind_name} 📐 ${house.area} 坪 🦶 在 ${house.floor_str}
-${house.community} 🗺️ ${house.location}
+    💰 \`${house.price}\` ${house.price_unit}
+    類型：${house.kind_name} 📐 ${house.area} 坪 🦶 在 ${house.floor_str}
+    ${house.community} 🗺️ ${house.location}
 
-*📌Google Map*
-https://www.google.com/maps/search/?api=1&query=${house.location}
+    *📌Google Map*
+    https://www.google.com/maps/search/?api=1&query=${house.location}
 
-💡 ${house.refresh_time}更新
+    💡 ${house.refresh_time}更新
 
-==打開 🌍 網站==
-https://rent.591.com.tw/home/${house.post_id}
+    ==打開 🌍 網站==
+    https://rent.591.com.tw/home/${house.post_id}
 
-📱手機 App：${mobileUrl}
+    📱手機 App：${mobileUrl}
 
-\`${house.rent_tag?.map((tag) => tag.name)}\`
+    ${rentTag}
 
-*👀 昨天有 ${house.yesterday_hit} 人瀏覽*
-`;
+    *👀 昨天有 ${house.yesterday_hit} 人瀏覽*
+  `;
 };
 
 export async function notify(newHouses: DataItem[]) {
