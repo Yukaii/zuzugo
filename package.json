@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "inngest-dev": "inngest-cli dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
