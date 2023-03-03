@@ -95,3 +95,21 @@ model SlackAppInstallation {
   tokenType                       String    @default("bot") @map("token_type")
   installedAt                     DateTime  @default(now()) @map("installed_at")
 }
+
+model SlackInstallationToSubscription {
+  id String @id @default(cuid())
+
+  channelId String @map("channel_id")
+
+  subscription        HouseSubscription @relation(fields: [houseSubscriptionId], references: [id])
+  houseSubscriptionId String
+
+  @@unique([channelId, houseSubscriptionId])
+}
+
+model HouseSubscription {
+  id    String @id @default(cuid())
+  query String
+
+  SlackInstallationToSubscription SlackInstallationToSubscription[]
+}

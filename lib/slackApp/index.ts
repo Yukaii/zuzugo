@@ -29,13 +29,7 @@ export function setupSlackApp(setupApp: (app: App) => void) {
     clientId: config.slackClientId,
     clientSecret: config.slackClientSecret,
     stateSecret: config.slackStateSecret,
-    scopes: [
-      "commands",
-      "incoming-webhook",
-      "chat:write",
-      "chat:write.public",
-      "chat:write.customize",
-    ],
+    scopes: ["commands", "incoming-webhook", "chat:write", "chat:write.public"],
     installerOptions: {
       directInstall: true,
       callbackOptions: {

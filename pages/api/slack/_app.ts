@@ -8,7 +8,7 @@ export { appRunner } from "@/lib/slackApp";
 setupSlackApp((app) => {
   const slashCommand = config.slackSlashCommand || "/zuzugo";
 
-  app.command(slashCommand, async ({ ack, command, say, client, respond }) => {
+  app.command(slashCommand, async ({ ack, command, client }) => {
     if (config.slackDevMode) {
       console.log("Slash command", command);
     }
