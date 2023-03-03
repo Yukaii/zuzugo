@@ -2,9 +2,9 @@ import { SlackAppInstallation } from "@prisma/client";
 import { IncomingWebhook } from "@slack/webhook";
 
 import { process591QueryUrl } from "@/lib/591House/utils";
+import { config } from "@/lib/config";
 import { inngest } from "@/lib/inngest/client";
 import { prisma } from "@/lib/prisma";
-import { config } from "@/lib/config";
 
 type CommandHandler = (args: {
   webhook: IncomingWebhook;
