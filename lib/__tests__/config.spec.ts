@@ -1,4 +1,4 @@
-import { appendRentalAPIParams } from "@/lib/config";
+import { appendRentalAPIParams } from "@/lib/591House/utils";
 
 test("Should insert additional query params", () => {
   const search = "";
