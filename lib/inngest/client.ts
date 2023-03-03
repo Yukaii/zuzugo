@@ -23,14 +23,25 @@ type NotifySlack = {
 
 type FetchNewHouses = {
   name: "tasks/fetchNewHouses";
-  data: {}
+  data: {};
+};
+
+type SlashCommand = {
+  name: "slackCommands/slashHandler";
+  data: {
+    channelId: string;
+    userId: string;
+    command: string;
+    args: string;
+  };
 };
 
 type Events = {
   "notification/dispatchAll": DispatchAll;
   "notification/notifyLine": NotifyLine;
   "notification/notifySlack": NotifySlack;
-  "tasks/fetchNewHouses": FetchNewHouses
+  "tasks/fetchNewHouses": FetchNewHouses;
+  "slackCommands/slashHandler": SlashCommand;
 };
 
 export const inngest = new Inngest<Events>({

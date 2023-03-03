@@ -51,4 +51,5 @@ export const config = {
   apiSecret,
   tokenLine,
   production: process.env.NODE_ENV === "production",
+  cronEnabled: process.env.DISABLE_CRON !== "true",
 };

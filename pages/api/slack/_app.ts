@@ -1,24 +1,53 @@
 import { config } from "@/lib/config";
+import { inngest } from "@/lib/inngest/client";
 import { setupSlackApp } from "@/lib/slackApp";
+import { availableCommands } from "@/lib/slackApp/commands";
+
 export { appRunner } from "@/lib/slackApp";
 
 setupSlackApp((app) => {
-  app.command(config.slackSlashCommand || "/zuzugo", async ({ ack, command, say, client }) => {
-    console.log(command.text);
+  const slashCommand = config.slackSlashCommand || "/zuzugo";
 
-    await client.chat.postMessage({
-      blocks: [
-        {
-          type: "section",
-          text: {
-            type: "mrkdwn",
-            text: "*Hello*, _World!_",
-          },
-        },
-      ],
-      channel: command.channel_id,
+  app.command(slashCommand, async ({ ack, command, say, client, respond }) => {
+    if (config.slackDevMode) {
+      console.log("Slash command", command);
+    }
+
+    // TODO: Add show help command
+    const handleInvalidCommand = async () => {
+      await client.chat.postEphemeral({
+        channel: command.channel_id,
+        text: "Invalid command",
+        user: command.user_id,
+      });
+
+      ack();
+    };
+
+    const { text } = command;
+    const regex = /(?<cmd>\w+)(?:\s+(?<args>.*))?/;
+    const match = text.match(regex);
+
+    if (!match) {
+      return handleInvalidCommand();
+    }
+
+    const { cmd, args } = match.groups as { cmd: string; args: string };
+    if (!availableCommands.includes(cmd)) {
+      return handleInvalidCommand();
+    }
+
+    await inngest.send("slackCommands/slashHandler", {
+      data: {
+        channelId: command.channel_id,
+        command: cmd,
+        args,
+        userId: command.user_id,
+      },
     });
 
-    ack();
+    await ack({
+      response_type: "in_channel",
+    });
   });
 });
