@@ -1,7 +1,6 @@
 import { process591QueryUrl } from "./591House/utils";
 
 const apiSecret = process.env.ZUZUGO_API_SECRET;
-
 const tokenLine = process.env.LINE_API_TOKEN;
 
 // const isSubwayStationFilterEnabled = process.env.ENABLE_SUBWAY_STATION_FILTER === "true";
@@ -34,4 +33,9 @@ export const config = {
   tokenLine,
   production: process.env.NODE_ENV === "production",
   cronEnabled: process.env.DISABLE_CRON !== "true",
+
+  line: {
+    LINE_ACCESS_TOKEN: process.env.LINE_ACCESS_TOKEN,
+    LINE_CHANNEL_SECRET: process.env.LINE_CHANNEL_SECRET
+  }
 };
