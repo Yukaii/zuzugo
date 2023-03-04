@@ -13,8 +13,8 @@ const message: TextMessage = {
 };
 
 // @todo: get groupId from database.
-export default function sendLineBotMessage(groupId: string) {
-  client.pushMessage(groupId, message)
+export default async function sendLineBotMessage(groupId: string) {
+  await client.pushMessage(groupId, message)
     .then(() => {
       console.log('訊息發送成功');
     })
