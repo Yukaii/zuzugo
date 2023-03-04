@@ -1,9 +1,10 @@
 import { Client, TextMessage } from '@line/bot-sdk';
 
+import { config } from 'lib/config'
 // set Channel Access Token and Channel Secret for Line Bot 
 const client = new Client({
-  channelAccessToken: process.env.LINE_ACCESS_TOKEN || '',
-  channelSecret: process.env.LINE_CHANNEL_SECRET,
+  channelAccessToken: config.line.LINE_ACCESS_TOKEN || '',
+  channelSecret: config.line.LINE_CHANNEL_SECRET,
 });
 
 // @todo: pass rent data from api.

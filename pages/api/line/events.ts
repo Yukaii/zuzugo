@@ -24,7 +24,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     } = firstEvent.source as User & Group & Room;
 
     const chatId = userId || groupId || roomId;
-    await sendLineBotMessage(chatId)
+    try {
+      await sendLineBotMessage(chatId)
+    } catch (e) {
+      console.error(e)
+    }
   }
 
   res.send(200)
