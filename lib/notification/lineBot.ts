@@ -16,10 +16,4 @@ const message: TextMessage = {
 // @todo: get groupId from database.
 export default async function sendLineBotMessage(groupId: string) {
   await client.pushMessage(groupId, message)
-    .then(() => {
-      console.log('訊息發送成功');
-    })
-    .catch((err) => {
-      console.error(`訊息發送失敗：${err}`);
-    });
 }
