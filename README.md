@@ -7,6 +7,8 @@
   抓取 591 最新租屋資訊，並提供聊天機器人通知（可簡易的擴充）
 </p>
 
+Status page: <https://zuzugo.instatus.com/>
+
 ## Screenshots
 
 |                  Line Notify                  |                 Slack Bot                 |
