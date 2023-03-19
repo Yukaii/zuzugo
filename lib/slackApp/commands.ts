@@ -19,7 +19,11 @@ const commandHandlers: Record<string, CommandHandler> = {
     const match = args?.match(firstNonWhitespace);
 
     if (!match) {
-      throw new Error("No subscribe argument provided");
+      await webhook.send({
+        text: `No subscribe argument provided`,
+      });
+
+      return;
     }
 
     const arg = match[0];
@@ -55,6 +59,10 @@ const commandHandlers: Record<string, CommandHandler> = {
 
         break;
       }
+      case "help": {
+        commandHandlers.help({ webhook, args, installation });
+        break;
+      }
       default: {
         const query = process591QueryUrl(arg);
 
@@ -88,7 +96,11 @@ const commandHandlers: Record<string, CommandHandler> = {
     const match = args?.match(firstNonWhitespace);
 
     if (!match) {
-      throw new Error("No unsubscribe argument provided");
+      await webhook.send({
+        text: `No unsubscribe argument provided`,
+      });
+
+      return;
     }
 
     const subscriptionId = match[0];
@@ -136,7 +148,42 @@ const commandHandlers: Record<string, CommandHandler> = {
       });
     }
   },
-  help: async ({ webhook }) => {},
+  help: async ({ webhook }) => {
+    await webhook.send({
+      blocks: [
+        {
+          type: "section",
+          text: {
+            type: "mrkdwn",
+            text: "Hi there :wave: here are some ideas of what you can do:",
+          },
+        },
+        {
+          type: "section",
+          text: {
+            type: "mrkdwn",
+            text: "*Subscribe to queries*\nSubscribe\n`/zuzugo subscribe query`\nShow subscriptions\n`/zuzugo subscribe list`\nUnsubscribe\n`/zuzugo unsubscribe subscriptionId`",
+          },
+        },
+        {
+          type: "section",
+          text: {
+            type: "mrkdwn",
+            text: "For more information, visit our documentation:",
+          },
+          accessory: {
+            type: "button",
+            text: {
+              type: "plain_text",
+              text: "Documentation",
+              emoji: true,
+            },
+            url: "https://example.com/docs",
+          },
+        },
+      ],
+    });
+  },
 };
 
 export const availableCommands = Object.keys(commandHandlers);
