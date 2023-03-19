@@ -16,7 +16,9 @@ export class _591HouseRepository {
     let insertedIds = [] as string[];
 
     await prisma.$transaction(async (tx) => {
-      const existingHouses = await tx.house.findMany({
+      const model = config.useNewHouse ? tx.house : tx.legacyHouse;
+
+      const existingHouses = await model.findMany({
         where: {
           pk: {
             in: houseIds,
@@ -37,7 +39,7 @@ export class _591HouseRepository {
 
       insertedIds = housesToInsert.map((house) => house.pk);
 
-      return tx.house.createMany({
+      return model.createMany({
         data: housesToInsert,
       });
     });
