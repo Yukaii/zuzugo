@@ -12,10 +12,16 @@ import {
   Context,
 } from "jsx-slack";
 
-export const Subscriptions = ({ subscriptions }: { subscriptions: HouseSubscription[] }) => {
+export const Subscriptions = ({
+  subscriptions,
+  sectionMessage,
+}: {
+  subscriptions: HouseSubscription[];
+  sectionMessage?: string;
+}) => {
   return (
     <Blocks>
-      <Section>You are subscribed to the following queries:</Section>
+      {sectionMessage ? <Section>{sectionMessage}</Section> : null}
 
       {subscriptions.map((subscription) => (
         <Fragment key={subscription.id}>

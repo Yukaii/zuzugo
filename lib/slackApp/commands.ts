@@ -33,6 +33,7 @@ const commandHandlers: Record<string, CommandHandler> = {
       },
     });
 
+    // subcommands for /zuzugo subscribe
     switch (arg) {
       case "list": {
         const subscriptions = installationToSubscriptions.map((record) => record.subscription);
@@ -42,7 +43,10 @@ const commandHandlers: Record<string, CommandHandler> = {
             text: `You are not subscribed to any queries`,
           });
         } else {
-          const blocks = Subscriptions({ subscriptions }) as unknown as any[];
+          const blocks = Subscriptions({
+            subscriptions,
+            sectionMessage: "You are subscribed to the following queries:",
+          }) as unknown as any[];
 
           await webhook.send({
             blocks,
@@ -54,7 +58,6 @@ const commandHandlers: Record<string, CommandHandler> = {
       default: {
         const query = process591QueryUrl(arg);
 
-        // TODO: Check if query is valid 591 url
         const record = installationToSubscriptions.find(
           (record) => record.subscription.query === query
         );
@@ -80,7 +83,59 @@ const commandHandlers: Record<string, CommandHandler> = {
       }
     }
   },
-  unsubscribe: async ({ webhook }) => {},
+  unsubscribe: async ({ webhook, args, installation }) => {
+    const firstNonWhitespace = /^[^\s]+/g;
+    const match = args.match(firstNonWhitespace);
+
+    if (!match) {
+      throw new Error("No unsubscribe argument provided");
+    }
+
+    const subscriptionId = match[0];
+
+    try {
+      const deletedSubscription = await prisma.houseSubscription.delete({
+        where: {
+          id: subscriptionId,
+        },
+      });
+
+      if (config.slackDevMode) {
+        console.debug("deletedSubscription", deletedSubscription);
+      }
+    } catch (error) {
+      // no subscription found
+      await webhook.send({
+        text: `No subscription found with id \`${subscriptionId}\``,
+      });
+    }
+
+    const installationToSubscriptions = await prisma.slackInstallationToSubscription.findMany({
+      where: {
+        channelId: installation.incomingWebhookChannelId!,
+      },
+      include: {
+        subscription: true,
+      },
+    });
+
+    const subscriptions = installationToSubscriptions.map((record) => record.subscription);
+
+    if (subscriptions.length === 0) {
+      await webhook.send({
+        text: `You are not subscribed to any queries`,
+      });
+    } else {
+      const blocks = Subscriptions({
+        subscriptions,
+        sectionMessage: "You are still subscribed to the following queries:",
+      }) as unknown as any[];
+
+      await webhook.send({
+        blocks,
+      });
+    }
+  },
   help: async ({ webhook }) => {},
 };
 
