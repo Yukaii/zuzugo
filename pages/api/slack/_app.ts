@@ -2,6 +2,7 @@ import { config } from "@/lib/config";
 import { inngest } from "@/lib/inngest/client";
 import { setupSlackApp } from "@/lib/slackApp";
 import { availableCommands } from "@/lib/slackApp/commands";
+import { helpMessage } from "@/lib/slackApp/helpCommand";
 
 export { appRunner } from "@/lib/slackApp";
 
@@ -13,12 +14,11 @@ setupSlackApp((app) => {
       console.log("Slash command", command);
     }
 
-    // TODO: Add show help command
     const handleInvalidCommand = async () => {
       await client.chat.postEphemeral({
         channel: command.channel_id,
-        text: "Invalid command",
         user: command.user_id,
+        ...helpMessage,
       });
 
       ack();

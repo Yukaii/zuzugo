@@ -26,6 +26,9 @@ Status page: <https://zuzugo.instatus.com/>
 ```bash
 pnpm install
 cp .env.example .env
+
+# start the inngest dev server
+pnpm inngest-dev
 ```
 
 ## Previous Works
@@ -41,6 +44,12 @@ cp .env.example .env
 - [bbgo](https://github.com/c9s/bbgo) -> BB 狗，雖然本專案沒有半行 Go...
 
 ![yeah](https://1.bp.blogspot.com/-h-sB7bTbyDo/XmerCeUWoCI/AAAAAAAALSU/3DmKLm3ZXh8NUecPNKHB0YCVrUd51MbRQCK4BGAYYCw/s1600/noname.png)
+
+## Slack setup
+
+1. Go to <https://zuzugo.tunnelto.dev/api/slack/install>
+2. Click `Add to Slack channel`, select the channel you want to receive the notification
+3. Check the database, you should see SlackAppInstallation table has a new record
 
 ## License
 

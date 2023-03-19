@@ -5,6 +5,8 @@ import { process591QueryUrl } from "@/lib/591House/utils";
 import { config } from "@/lib/config";
 import { inngest } from "@/lib/inngest/client";
 import { prisma } from "@/lib/prisma";
+import { Subscriptions } from "@/lib/slackApp/components/Subscriptions";
+import { helpMessage } from "@/lib/slackApp/helpCommand";
 
 type CommandHandler = (args: {
   webhook: IncomingWebhook;
@@ -15,10 +17,14 @@ type CommandHandler = (args: {
 const commandHandlers: Record<string, CommandHandler> = {
   subscribe: async ({ webhook, args, installation }) => {
     const firstNonWhitespace = /^[^\s]+/g;
-    const match = args.match(firstNonWhitespace);
+    const match = args?.match(firstNonWhitespace);
 
     if (!match) {
-      throw new Error("No subscribe argument provided");
+      await webhook.send({
+        text: `No subscribe argument provided`,
+      });
+
+      return;
     }
 
     const arg = match[0];
@@ -32,30 +38,35 @@ const commandHandlers: Record<string, CommandHandler> = {
       },
     });
 
+    // subcommands for /zuzugo subscribe
     switch (arg) {
       case "list": {
-        const subscriptionUrls = installationToSubscriptions.map(
-          (record) => record.subscription.query
-        );
+        const subscriptions = installationToSubscriptions.map((record) => record.subscription);
 
-        if (subscriptionUrls.length === 0) {
+        if (subscriptions.length === 0) {
           await webhook.send({
             text: `You are not subscribed to any queries`,
           });
         } else {
-          // TODO: print subscription id to let user unsubscribe
-          // Prepend 591 url with https://rent.591.com.tw/
+          const blocks = Subscriptions({
+            subscriptions,
+            sectionMessage: "You are subscribed to the following queries:",
+          }) as unknown as any[];
+
           await webhook.send({
-            text: `You are subscribed to the following queries: ${subscriptionUrls.join(", ")}`,
+            blocks,
           });
         }
 
         break;
       }
+      case "help": {
+        commandHandlers.help({ webhook, args, installation });
+        break;
+      }
       default: {
         const query = process591QueryUrl(arg);
 
-        // TODO: Check if query is valid 591 url
         const record = installationToSubscriptions.find(
           (record) => record.subscription.query === query
         );
@@ -81,8 +92,66 @@ const commandHandlers: Record<string, CommandHandler> = {
       }
     }
   },
-  unsubscribe: async ({ webhook }) => {},
-  help: async ({ webhook }) => {},
+  unsubscribe: async ({ webhook, args, installation }) => {
+    const firstNonWhitespace = /^[^\s]+/g;
+    const match = args?.match(firstNonWhitespace);
+
+    if (!match) {
+      await webhook.send({
+        text: `No unsubscribe argument provided`,
+      });
+
+      return;
+    }
+
+    const subscriptionId = match[0];
+
+    try {
+      const deletedSubscription = await prisma.houseSubscription.delete({
+        where: {
+          id: subscriptionId,
+        },
+      });
+
+      if (config.slackDevMode) {
+        console.debug("deletedSubscription", deletedSubscription);
+      }
+    } catch (error) {
+      // no subscription found
+      await webhook.send({
+        text: `No subscription found with id \`${subscriptionId}\``,
+      });
+    }
+
+    const installationToSubscriptions = await prisma.slackInstallationToSubscription.findMany({
+      where: {
+        channelId: installation.incomingWebhookChannelId!,
+      },
+      include: {
+        subscription: true,
+      },
+    });
+
+    const subscriptions = installationToSubscriptions.map((record) => record.subscription);
+
+    if (subscriptions.length === 0) {
+      await webhook.send({
+        text: `You are not subscribed to any queries`,
+      });
+    } else {
+      const blocks = Subscriptions({
+        subscriptions,
+        sectionMessage: "You are still subscribed to the following queries:",
+      }) as unknown as any[];
+
+      await webhook.send({
+        blocks,
+      });
+    }
+  },
+  help: async ({ webhook }) => {
+    await webhook.send(helpMessage);
+  },
 };
 
 export const availableCommands = Object.keys(commandHandlers);
@@ -109,8 +178,9 @@ export const slashCommand = inngest.createFunction(
     const handler = commandHandlers[command];
 
     if (!handler) {
-      // TODO: Send help message
-      throw new Error("No handler found");
+      const helpHandler = commandHandlers.help;
+
+      await helpHandler({ webhook, args, installation });
     }
 
     try {

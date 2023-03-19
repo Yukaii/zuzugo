@@ -10,6 +10,7 @@ const tokenLine = process.env.LINE_API_TOKEN;
 const slackWebhook = process.env.SLACK_WEBHOOK!;
 
 export const config = {
+  appUrl: process.env.APP_URL ?? process.env.VERCEL_URL,
   houseListURL: `https://rent.591.com.tw/home/search/rsList?${process591QueryUrl(
     process.env.TARGET_URL || ""
   )}`,
@@ -36,6 +37,6 @@ export const config = {
 
   line: {
     LINE_ACCESS_TOKEN: process.env.LINE_ACCESS_TOKEN,
-    LINE_CHANNEL_SECRET: process.env.LINE_CHANNEL_SECRET
-  }
+    LINE_CHANNEL_SECRET: process.env.LINE_CHANNEL_SECRET,
+  },
 };
