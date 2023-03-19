@@ -27,7 +27,7 @@ export const helpMessage = {
           text: "Documentation",
           emoji: true,
         },
-        url: "https://example.com/docs",
+        url: "https://github.com/Yukaii/zuzugo/blob/main/docs/CommandHelp.md",
       },
     },
   ],
