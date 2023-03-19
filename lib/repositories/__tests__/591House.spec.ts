@@ -1,8 +1,12 @@
 import { Prisma } from "@prisma/client";
 
+import { config } from "@/lib/config";
 import { prisma } from "@/lib/prisma";
 import { _591HouseRepository } from "@/lib/repositories/591House";
 import { houseFactory } from "@/tests/factory";
+
+// TODO: remove me after migration
+const houseModel = config.useNewHouse ? prisma.house : prisma.legacyHouse;
 
 test("it should insert houses", async function () {
   const houses = Array.from({ length: 10 }, houseFactory);
@@ -23,7 +27,7 @@ test("it should clear old records", async function () {
 
   const oneMonthAgo = new Date(Date.now() - 1000 * 60 * 60 * 24 * 30);
   // update houses created at to one month ago
-  await prisma.house.updateMany({
+  await houseModel.updateMany({
     where: {
       pk: {
         in: houses.map((house) => String(house.post_id)),
