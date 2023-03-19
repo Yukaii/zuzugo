@@ -16,7 +16,7 @@ type CommandHandler = (args: {
 const commandHandlers: Record<string, CommandHandler> = {
   subscribe: async ({ webhook, args, installation }) => {
     const firstNonWhitespace = /^[^\s]+/g;
-    const match = args.match(firstNonWhitespace);
+    const match = args?.match(firstNonWhitespace);
 
     if (!match) {
       throw new Error("No subscribe argument provided");
@@ -85,7 +85,7 @@ const commandHandlers: Record<string, CommandHandler> = {
   },
   unsubscribe: async ({ webhook, args, installation }) => {
     const firstNonWhitespace = /^[^\s]+/g;
-    const match = args.match(firstNonWhitespace);
+    const match = args?.match(firstNonWhitespace);
 
     if (!match) {
       throw new Error("No unsubscribe argument provided");
