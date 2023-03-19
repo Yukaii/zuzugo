@@ -39,4 +39,6 @@ export const config = {
     LINE_ACCESS_TOKEN: process.env.LINE_ACCESS_TOKEN,
     LINE_CHANNEL_SECRET: process.env.LINE_CHANNEL_SECRET,
   },
+
+  useNewHouse: process.env.USE_NEW_HOUSE === "true",
 };

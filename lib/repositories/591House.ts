@@ -1,9 +1,13 @@
 import { Prisma } from "@prisma/client";
 
+import { config } from "@/lib/config";
 import { prisma } from "@/lib/prisma";
 import { DataItem } from "@/lib/types";
 
 const HOUSE_SOURCE = "591";
+
+// TODO: remove me after migration
+const houseModel = config.useNewHouse ? prisma.house : prisma.legacyHouse;
 
 export class _591HouseRepository {
   static async insertHouses(houses: DataItem[]) {
@@ -12,7 +16,9 @@ export class _591HouseRepository {
     let insertedIds = [] as string[];
 
     await prisma.$transaction(async (tx) => {
-      const existingHouses = await tx.house.findMany({
+      const model = config.useNewHouse ? tx.house : tx.legacyHouse;
+
+      const existingHouses = await model.findMany({
         where: {
           pk: {
             in: houseIds,
@@ -33,7 +39,7 @@ export class _591HouseRepository {
 
       insertedIds = housesToInsert.map((house) => house.pk);
 
-      return tx.house.createMany({
+      return model.createMany({
         data: housesToInsert,
       });
     });
@@ -42,7 +48,7 @@ export class _591HouseRepository {
   }
 
   static async getHousesByIds(houseIds: string[]) {
-    return prisma.house.findMany({
+    return houseModel.findMany({
       where: {
         pk: {
           in: houseIds,
@@ -56,7 +62,7 @@ export class _591HouseRepository {
     const now = new Date();
     const twoWeeksAgo = new Date(now.getTime() - 14 * 24 * 60 * 60 * 1000);
 
-    return prisma.house.deleteMany({
+    return houseModel.deleteMany({
       where: {
         createdAt: {
           lt: twoWeeksAgo,
