@@ -5,6 +5,7 @@ import { process591QueryUrl } from "@/lib/591House/utils";
 import { config } from "@/lib/config";
 import { inngest } from "@/lib/inngest/client";
 import { prisma } from "@/lib/prisma";
+import { Subscriptions } from "@/lib/slackApp/components/Subscriptions";
 
 type CommandHandler = (args: {
   webhook: IncomingWebhook;
@@ -34,19 +35,17 @@ const commandHandlers: Record<string, CommandHandler> = {
 
     switch (arg) {
       case "list": {
-        const subscriptionUrls = installationToSubscriptions.map(
-          (record) => record.subscription.query
-        );
+        const subscriptions = installationToSubscriptions.map((record) => record.subscription);
 
-        if (subscriptionUrls.length === 0) {
+        if (subscriptions.length === 0) {
           await webhook.send({
             text: `You are not subscribed to any queries`,
           });
         } else {
-          // TODO: print subscription id to let user unsubscribe
-          // Prepend 591 url with https://rent.591.com.tw/
+          const blocks = Subscriptions({ subscriptions }) as unknown as any[];
+
           await webhook.send({
-            text: `You are subscribed to the following queries: ${subscriptionUrls.join(", ")}`,
+            blocks,
           });
         }
 
@@ -109,8 +108,9 @@ export const slashCommand = inngest.createFunction(
     const handler = commandHandlers[command];
 
     if (!handler) {
-      // TODO: Send help message
-      throw new Error("No handler found");
+      const helpHandler = commandHandlers.help;
+
+      await helpHandler({ webhook, args, installation });
     }
 
     try {
