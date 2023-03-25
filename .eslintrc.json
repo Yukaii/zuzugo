@@ -3,7 +3,15 @@
     "next/core-web-vitals",
     "plugin:import/recommended",
     "plugin:import/typescript",
+    "plugin:tailwindcss/recommended",
     "prettier"
+  ],
+  "root": true,
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx", "*.js"],
+      "parser": "@typescript-eslint/parser"
+    }
   ],
   "plugins": ["jest"],
   "rules": {
