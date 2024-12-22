@@ -42,6 +42,7 @@ export function setupSlackApp(setupApp: (app: App) => void) {
             .end();
         },
       },
+      redirectUriPath: config.slackRedirectUri
     },
     installationStore,
     redirectUri: config.slackRedirectUri,
