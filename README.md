@@ -26,7 +26,31 @@ Status page: <https://zuzugo.instatus.com/>
 ```bash
 pnpm install
 cp .env.example .env
+```
 
+2. 更新 .env
+
+```
+SLACK_CLIENT_ID=
+SLACK_CLIENT_SECRET=
+SLACK_REDIRECT_URI=
+
+# 開發可以先關掉
+DISABLE_CRON=true
+
+# 記得先 createdb zuzugo-dev
+DATABASE_URL=postgres://postgres@localhost:5432/zuzugo-dev?schema=public
+```
+
+3. Primsa 相關
+
+```bash
+pnpm prisma generate
+pnpm prixma migrate deploy
+```
+
+
+```bash
 # start the inngest dev server
 pnpm inngest-dev
 ```
@@ -45,11 +69,53 @@ pnpm inngest-dev
 
 ![yeah](https://1.bp.blogspot.com/-h-sB7bTbyDo/XmerCeUWoCI/AAAAAAAALSU/3DmKLm3ZXh8NUecPNKHB0YCVrUd51MbRQCK4BGAYYCw/s1600/noname.png)
 
-## Slack setup
+## Slack App setup
 
-1. Go to <https://zuzugo.tunnelto.dev/api/slack/install>
-2. Click `Add to Slack channel`, select the channel you want to receive the notification
-3. Check the database, you should see SlackAppInstallation table has a new record
+1. Go <https://api.slack.com/apps?new_app=1> to create a new app from manifest
+2. Use the following manifest (TBD)
+
+```json
+{
+    "display_information": {
+        "name": "zuzugo"
+    },
+    "features": {
+        "bot_user": {
+            "display_name": "zuzugo",
+            "always_online": true
+        },
+        "slash_commands": [
+            {
+                "command": "/zuzugo",
+                "url": "https://your-zuzugo-domain/api/slack",
+                "description": "zuzugo commands!",
+                "should_escape": false
+            }
+        ]
+    },
+    "oauth_config": {
+        "redirect_urls": [
+            "https://your-zuzugo-domain/api/slack/oauth_redirect",
+            "https://your-zuzugo-domain/api/auth/callback/slack"
+        ],
+        "scopes": {
+            "bot": [
+                "commands"
+            ]
+        }
+    },
+    "settings": {
+        "org_deploy_enabled": false,
+        "socket_mode_enabled": false,
+        "token_rotation_enabled": false
+    }
+}
+```
+
+1. Go to <https://your-zuzugo-domain/api/slack/install>
+1. Click `Add to Slack channel`, select the channel you want to receive the notification
+1. Finish Oauth login
+1. Check the database, you should see SlackAppInstallation table has a new record
 
 ## License
 
