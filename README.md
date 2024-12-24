@@ -76,39 +76,39 @@ pnpm inngest-dev
 
 ```json
 {
-    "display_information": {
-        "name": "zuzugo"
+  "display_information": {
+    "name": "zuzugo"
+  },
+  "features": {
+    "bot_user": {
+      "display_name": "zuzugo",
+      "always_online": true
     },
-    "features": {
-        "bot_user": {
-            "display_name": "zuzugo",
-            "always_online": true
-        },
-        "slash_commands": [
-            {
-                "command": "/zuzugo",
-                "url": "https://your-zuzugo-domain/api/slack",
-                "description": "zuzugo commands!",
-                "should_escape": false
-            }
-        ]
-    },
-    "oauth_config": {
-        "redirect_urls": [
-            "https://your-zuzugo-domain/api/slack/oauth_redirect",
-            "https://your-zuzugo-domain/api/auth/callback/slack"
-        ],
-        "scopes": {
-            "bot": [
-                "commands"
-            ]
-        }
-    },
-    "settings": {
-        "org_deploy_enabled": false,
-        "socket_mode_enabled": false,
-        "token_rotation_enabled": false
+    "slash_commands": [
+      {
+        "command": "/zuzugo",
+        "url": "https://your-zuzugo-domain/api/slack",
+        "description": "zuzugo commands!",
+        "should_escape": false
+      }
+    ]
+  },
+  "oauth_config": {
+    "redirect_urls": [
+      "https://your-zuzugo-domain/api/slack/oauth_redirect",
+      "https://your-zuzugo-domain/api/auth/callback/slack"
+    ],
+    "scopes": {
+      "bot": [
+        "commands"
+      ]
     }
+  },
+  "settings": {
+    "org_deploy_enabled": false,
+    "socket_mode_enabled": false,
+    "token_rotation_enabled": false
+  }
 }
 ```
 
